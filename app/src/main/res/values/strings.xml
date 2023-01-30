@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">OnlineLearning</string>
+    <string name="title_activity_onboarding">OnboardingActivity</string>
+    <string name="title_activity_authentication">AuthenticationActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_base">BaseActivity</string>
+    
+    <string name="onboarding_teaching_title">Teaching</string>
+    <string name="onboarding_learning_title">Learning</string>
+    <string name="onboarding_examination_title">Examination</string>
+    <string name="onboarding_common_description">Our new service makes it easy for you to work anywhere, there are new features will ready help you.</string>
 </resources>

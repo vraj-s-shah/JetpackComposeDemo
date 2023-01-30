@@ -12,7 +12,22 @@
         android:theme="@style/Theme.OnlineLearning"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.home.HomeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.OnlineLearning" />
+        <activity
+            android:name=".ui.authentication.AuthenticationActivity"
+            android:exported="false"
+            android:label="@string/title_activity_authentication"
+            android:theme="@style/Theme.OnlineLearning" />
+        <activity
+            android:name=".ui.onboarding.OnboardingActivity"
+            android:exported="false"
+            android:label="@string/title_activity_onboarding"
+            android:theme="@style/Theme.OnlineLearning" />
+        <activity
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.OnlineLearning">
             <intent-filter>
