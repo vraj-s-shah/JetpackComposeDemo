@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 
 class OnboardingViewModel(
-    context: Application,
-    sharedPrefs: SharedPrefs
+    private val context: Application,
+    private val sharedPrefs: SharedPrefs
 ): ViewModel() {
 
     private val mCurrentPage = MutableStateFlow(0)
@@ -32,5 +32,9 @@ class OnboardingViewModel(
 
     fun onPageChange(page: Int) {
         mCurrentPage.value = page
+    }
+
+    fun setOnboardingCompleted() {
+        sharedPrefs.isOnboardingCompleted = true
     }
 }

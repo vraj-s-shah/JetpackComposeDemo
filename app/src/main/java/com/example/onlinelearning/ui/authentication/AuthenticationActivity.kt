@@ -1,21 +1,48 @@
 package com.example.onlinelearning.ui.authentication
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Text
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.onlinelearning.ui.base.BaseComposeActivity
 
-class AuthenticationActivity : ComponentActivity() {
+class AuthenticationActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-                Text(text = "Authentication")
-            }
+            val navHostController = rememberNavController()
+            AuthenticationScreens(navHostController)
+        }
+        setWhiteStatusBar()
+    }
+}
+
+@Composable
+fun AuthenticationScreens(navHostController: NavHostController) {
+    NavHost(
+        navController = navHostController,
+        startDestination = Authentication.SignInSignUp.route
+    ) {
+        composable(Authentication.SignInSignUp.route) {
+            SignInSignUpScreen(navHostController = navHostController)
+        }
+        composable(Authentication.SignIn.route) {
+            SignInScreen(navHostController = navHostController)
+        }
+        composable(Authentication.SignUp.route) {
+            SignUpScreen(navHostController = navHostController)
         }
     }
+}
+
+sealed class Authentication(val route: String) {
+    object SignInSignUp : Authentication("signInSignUp")
+    object SignIn : Authentication("signIn")
+    object SignUp : Authentication("signUp")
+    object Otp : Authentication("otp")
+    object ForgotPassword : Authentication("forgotPassword")
+    object ResetPassword : Authentication("resetPassword")
 }

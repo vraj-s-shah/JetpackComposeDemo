@@ -1,11 +1,8 @@
 package com.example.onlinelearning.viewmodel
 
-import android.app.Activity
 import android.app.Application
-import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.onlinelearning.utils.SharedPrefs
 
 class ViewModelFactory private constructor(
@@ -26,6 +23,12 @@ class ViewModelFactory private constructor(
                 SplashScreenViewModel(
                     mSharedPrefs
                 )
+            }
+            isAssignableFrom(SignInViewModel::class.java) -> {
+                SignInViewModel()
+            }
+            isAssignableFrom(SignUpViewModel::class.java) -> {
+                SignUpViewModel()
             }
             else -> {
                 throw IllegalArgumentException(
@@ -48,7 +51,3 @@ class ViewModelFactory private constructor(
             }
     }
 }
-
-@Composable
-inline fun <reified T : ViewModel> Activity.obtainViewModel(): T =
-    viewModel(factory = ViewModelFactory.getInstance(this.application))
