@@ -41,17 +41,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.onlinelearning.R
 import com.example.onlinelearning.data.OnboardingData
-import com.example.onlinelearning.ui.BaseComposeActivity
 import com.example.onlinelearning.ui.authentication.AuthenticationActivity
+import com.example.onlinelearning.ui.base.BaseComposeActivity
+import com.example.onlinelearning.ui.base.TopBar
 import com.example.onlinelearning.ui.home.HomeActivity
 import com.example.onlinelearning.ui.theme.BaseGreen
 import com.example.onlinelearning.ui.theme.BlueText
+import com.example.onlinelearning.ui.theme.FontWeights
 import com.example.onlinelearning.ui.theme.LightGrayText
-import com.example.onlinelearning.ui.theme.PoppinsTypography
 import com.example.onlinelearning.ui.theme.ProgressCircleBackground
+import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
+import com.example.onlinelearning.utils.obtainViewModel
 import com.example.onlinelearning.utils.startAndFinish
 import com.example.onlinelearning.viewmodel.OnboardingViewModel
-import com.example.onlinelearning.viewmodel.obtainViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
@@ -68,7 +70,6 @@ class OnboardingActivity : BaseComposeActivity() {
             val pagerState = rememberPagerState(0)
             val viewModel = obtainViewModel<OnboardingViewModel>()
             val data = viewModel.data
-            val isUserLoggedIn = viewModel.isUserLoggedIn
             val currentPage by viewModel.currentPage.collectAsState()
             val currentSweepAngle by viewModel.currentSweepAngle.collectAsState(0f)
             val rightButtonText by viewModel.topBarRightButtonText.collectAsState("")
@@ -80,8 +81,8 @@ class OnboardingActivity : BaseComposeActivity() {
             Scaffold(
                 topBar = {
                     TopBar(
-                        onBackClicked = { finish() },
-                        onRightButtonClicked = { checkAndStartNextActivity(isUserLoggedIn) },
+                        onBackButtonClicked = { finish() },
+                        onRightButtonClicked = { viewModel.checkAndStartNextActivity() },
                         rightButtonText = rightButtonText
                     )
                 }
@@ -112,7 +113,7 @@ class OnboardingActivity : BaseComposeActivity() {
                         ) {
                             val isUserOnLastPage = currentPage == data.size - 1
                             if (isUserOnLastPage) {
-                                checkAndStartNextActivity(isUserLoggedIn)
+                                viewModel.checkAndStartNextActivity()
                             } else {
                                 viewModel.onPageChange(viewModel.currentPage.value + 1)
                                 scope.launch { pagerState.animateScrollToPage(currentPage) }
@@ -125,7 +126,8 @@ class OnboardingActivity : BaseComposeActivity() {
         setWhiteStatusBar()
     }
 
-    private fun checkAndStartNextActivity(isUserLoggedIn: Boolean) {
+    private fun OnboardingViewModel.checkAndStartNextActivity() {
+        setOnboardingCompleted()
         startAndFinish(
             if (isUserLoggedIn)
                 HomeActivity::class.java
@@ -168,7 +170,7 @@ fun OnboardingPager(
             Spacer(modifier = Modifier.height(64.dp))
             Text(
                 text = currentData.title,
-                style = PoppinsTypography.h4,
+                style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
                 fontSize = 25.sp,
                 lineHeight = 33.sp,
                 color = BlueText,
@@ -180,7 +182,7 @@ fun OnboardingPager(
             Spacer(modifier = Modifier.height(13.dp))
             Text(
                 text = currentData.description,
-                style = PoppinsTypography.h5,
+                style = getPoppinsTextStyleFor(FontWeights.FOUR_HUNDRED),
                 fontSize = 15.sp,
                 lineHeight = 26.sp,
                 color = LightGrayText,
