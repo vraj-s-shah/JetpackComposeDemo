@@ -24,6 +24,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -42,17 +43,24 @@ import com.example.onlinelearning.ui.theme.BlueText
 import com.example.onlinelearning.ui.theme.FontWeights
 import com.example.onlinelearning.ui.theme.getFontWeightFor
 import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
+import com.example.onlinelearning.utils.CredentialsValidator
 import com.example.onlinelearning.utils.CustomSpannableString
 import com.example.onlinelearning.utils.SpannedString
-import com.example.onlinelearning.utils.getString
-import com.example.onlinelearning.utils.obtainViewModel
-import com.example.onlinelearning.utils.popBackStackAndNavigate
+import com.example.onlinelearning.utils.extensions.getString
+import com.example.onlinelearning.utils.extensions.navigateWithNoBackStack
+import com.example.onlinelearning.utils.extensions.obtainViewModel
+import com.example.onlinelearning.utils.extensions.showShortToast
 import com.example.onlinelearning.viewmodel.SignInViewModel
 
 @Composable
-fun SignInScreen(navHostController: NavHostController) {
+fun SignInScreen(
+    navHostController: NavHostController,
+    onSignInSuccess: (Int) -> Unit
+) {
     val scrollState = rememberScrollState()
     val focusManager = LocalFocusManager.current
+    val context = LocalContext.current
+
     val viewModel = obtainViewModel<SignInViewModel>()
     val name by viewModel.name.collectAsState()
     val password by viewModel.password.collectAsState()
@@ -62,12 +70,15 @@ fun SignInScreen(navHostController: NavHostController) {
         topBar = {
             TopBar(
                 onBackButtonClicked = {
-                    navHostController.popBackStackAndNavigate(Authentication.SignInSignUp.route)
+                    navHostController.navigateWithNoBackStack(Authentication.SignInSignUp.route)
                 },
                 centerText = getString(R.string.sign_in_title)
             )
         }
     ) { padding ->
+        /**
+         * Parent view
+         */
         Column(
             verticalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier
@@ -80,6 +91,9 @@ fun SignInScreen(navHostController: NavHostController) {
                     indication = null
                 ) { focusManager.clearFocus() }
         ) {
+            /**
+             * Welcome back title
+             */
             Text(
                 text = getString(R.string.welcome_back_title),
                 style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
@@ -88,6 +102,9 @@ fun SignInScreen(navHostController: NavHostController) {
                 color = BlueText
             )
 
+            /**
+             * TextFields and forgot password button block
+             */
             Column {
                 BaseTextField(
                     textFieldValue = name,
@@ -132,6 +149,9 @@ fun SignInScreen(navHostController: NavHostController) {
                 )
             }
 
+            /**
+             * Sign in and navigate to sign up button block
+             */
             Column(
                 verticalArrangement = Arrangement.spacedBy(15.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -142,7 +162,22 @@ fun SignInScreen(navHostController: NavHostController) {
                 BaseButton(
                     text = getString(id = R.string.sign_in)
                 ) {
-                    // TODO: Check credentials and login
+                    viewModel.validateUserCredentials {
+                        context.apply {
+                            when (it) {
+                                CredentialsValidator.EmptyCredentials ->
+                                    showShortToast(getString(R.string.empty_credentials))
+                                CredentialsValidator.UserNotFound ->
+                                    showShortToast(getString(R.string.user_doesnt_exists, name))
+                                CredentialsValidator.WrongPassword ->
+                                    showShortToast(getString(R.string.wrong_password))
+                                is CredentialsValidator.ValidCredentials -> {
+                                    onSignInSuccess(it.id)
+                                }
+                                else -> {}
+                            }
+                        }
+                    }
                 }
 
                 CustomSpannableString(
@@ -169,6 +204,9 @@ fun SignInScreen(navHostController: NavHostController) {
                 )
             }
 
+            /**
+             * Google or apple login option block
+             */
             GoogleOrAppleLoginBlock()
         }
     }

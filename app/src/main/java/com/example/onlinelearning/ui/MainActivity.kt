@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.onlinelearning.ui.base.BaseComposeActivity
-import com.example.onlinelearning.utils.obtainViewModel
-import com.example.onlinelearning.utils.startAndFinish
+import com.example.onlinelearning.utils.extensions.obtainViewModel
+import com.example.onlinelearning.utils.extensions.startAndFinish
 import com.example.onlinelearning.viewmodel.SplashScreenViewModel
 
 

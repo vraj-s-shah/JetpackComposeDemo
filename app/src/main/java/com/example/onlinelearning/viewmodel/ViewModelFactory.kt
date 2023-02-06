@@ -3,11 +3,13 @@ package com.example.onlinelearning.viewmodel
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.onlinelearning.data.local.AppDatabase
 import com.example.onlinelearning.utils.SharedPrefs
 
 class ViewModelFactory private constructor(
     private val mApplication: Application,
-    private val mSharedPrefs: SharedPrefs
+    private val mSharedPrefs: SharedPrefs,
+    private val mAppDatabase: AppDatabase
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -25,10 +27,14 @@ class ViewModelFactory private constructor(
                 )
             }
             isAssignableFrom(SignInViewModel::class.java) -> {
-                SignInViewModel()
+                SignInViewModel(
+                    mAppDatabase.usersDao()
+                )
             }
             isAssignableFrom(SignUpViewModel::class.java) -> {
-                SignUpViewModel()
+                SignUpViewModel(
+                    mAppDatabase.usersDao()
+                )
             }
             else -> {
                 throw IllegalArgumentException(
@@ -43,10 +49,11 @@ class ViewModelFactory private constructor(
         private var INSTANCE: ViewModelFactory? = null
 
         fun getInstance(application: Application) =
-            INSTANCE ?: synchronized(ViewModelFactory::class.java) {
-                INSTANCE ?: ViewModelFactory(
+            INSTANCE ?: synchronized(Any()) {
+                ViewModelFactory(
                     application,
-                    SharedPrefs(application)
+                    SharedPrefs.getInstance(application),
+                    AppDatabase.getInstance(application)
                 ).also { INSTANCE = it }
             }
     }

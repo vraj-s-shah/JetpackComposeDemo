@@ -1,4 +1,4 @@
-package com.example.onlinelearning.data
+package com.example.onlinelearning.data.model
 
 import android.content.Context
 import com.example.onlinelearning.R

@@ -25,4 +25,11 @@
     <string name="or_continue_with">or continue with</string>
     <string name="google">Google</string>
     <string name="apple">Apple</string>
+    <string name="empty_credentials">One or more required field is empty</string>
+    <string name="invalid_email">Invalid email address</string>
+    <string name="invalid_password">Password must contain \n1 lowercase letter,\n1 uppercase letter,\n1 digit,\n1 special character and\nat least 6 characters long</string>
+    <string name="please_try_again">Cannot add user, please try again</string>
+    <string name="wrong_password">Entered password is wrong</string>
+    <string name="user_doesnt_exists">Cannot sign in. User %1$s not found</string>
+    <string name="user_already_added">Cannot add user. User %1$s already exists</string>
 </resources>

@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,8 +33,10 @@ fun BaseButton(
     textStyle: TextStyle = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
     textSize: TextUnit = 15.sp,
     text: String,
-    onButtonClicked: () -> Unit
+    onButtonClicked: @Composable () -> Unit
 ) {
+    val triggerButtonClick = remember { mutableStateOf(false) }
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
@@ -43,7 +47,7 @@ fun BaseButton(
             .clickable(
                 interactionSource = MutableInteractionSource(),
                 indication = null
-            ) { onButtonClicked() }
+            ) { triggerButtonClick.value = true }
     ) {
         Text(
             text = text,
@@ -52,5 +56,10 @@ fun BaseButton(
             lineHeight = 20.sp,
             color = textColor
         )
+    }
+
+    if (triggerButtonClick.value) {
+        onButtonClicked()
+        triggerButtonClick.value = false
     }
 }

@@ -48,7 +48,9 @@ fun SignInSignUpScreen(navHostController: NavHostController) {
                 .padding(horizontal = 25.dp)
         ) {
             BaseButton(text = "Sign In") {
-                navHostController.navigate(Authentication.SignIn.route)
+                navHostController.navigate(Authentication.SignIn.route) {
+                    launchSingleTop = true
+                }
             }
 
             BaseButton(
