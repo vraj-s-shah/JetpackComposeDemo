@@ -40,7 +40,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.onlinelearning.R
-import com.example.onlinelearning.data.OnboardingData
+import com.example.onlinelearning.data.model.OnboardingData
 import com.example.onlinelearning.ui.authentication.AuthenticationActivity
 import com.example.onlinelearning.ui.base.BaseComposeActivity
 import com.example.onlinelearning.ui.base.TopBar
@@ -51,8 +51,8 @@ import com.example.onlinelearning.ui.theme.FontWeights
 import com.example.onlinelearning.ui.theme.LightGrayText
 import com.example.onlinelearning.ui.theme.ProgressCircleBackground
 import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
-import com.example.onlinelearning.utils.obtainViewModel
-import com.example.onlinelearning.utils.startAndFinish
+import com.example.onlinelearning.utils.extensions.obtainViewModel
+import com.example.onlinelearning.utils.extensions.startAndFinish
 import com.example.onlinelearning.viewmodel.OnboardingViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager

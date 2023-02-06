@@ -8,32 +8,43 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.onlinelearning.ui.base.BaseComposeActivity
+import com.example.onlinelearning.ui.home.HomeActivity
+import com.example.onlinelearning.utils.Constants
+import com.example.onlinelearning.utils.extensions.startWithIntArgsAndFinish
 
 class AuthenticationActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val navHostController = rememberNavController()
-            AuthenticationScreens(navHostController)
+            AuthenticationScreens(navHostController) { userId ->
+                startWithIntArgsAndFinish(
+                    HomeActivity::class.java,
+                    Constants.loggedInUserIdKey to userId
+                )
+            }
         }
         setWhiteStatusBar()
     }
 }
 
 @Composable
-fun AuthenticationScreens(navHostController: NavHostController) {
+fun AuthenticationScreens(
+    navHostController: NavHostController,
+    onStartHomeActivity: (Int) -> Unit
+) {
     NavHost(
         navController = navHostController,
         startDestination = Authentication.SignInSignUp.route
     ) {
         composable(Authentication.SignInSignUp.route) {
-            SignInSignUpScreen(navHostController = navHostController)
+            SignInSignUpScreen(navHostController)
         }
         composable(Authentication.SignIn.route) {
-            SignInScreen(navHostController = navHostController)
+            SignInScreen(navHostController, onStartHomeActivity)
         }
         composable(Authentication.SignUp.route) {
-            SignUpScreen(navHostController = navHostController)
+            SignUpScreen(navHostController, onStartHomeActivity)
         }
     }
 }

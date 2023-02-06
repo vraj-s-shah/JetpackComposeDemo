@@ -2,7 +2,7 @@ package com.example.onlinelearning.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
-import com.example.onlinelearning.data.OnboardingData
+import com.example.onlinelearning.data.model.OnboardingData
 import com.example.onlinelearning.utils.SharedPrefs
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
