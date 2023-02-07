@@ -44,6 +44,7 @@ import com.example.onlinelearning.utils.extensions.getString
 import com.example.onlinelearning.utils.extensions.navigateWithNoBackStack
 import com.example.onlinelearning.utils.extensions.obtainViewModel
 import com.example.onlinelearning.utils.extensions.showShortToast
+import com.example.onlinelearning.utils.navigation.Authentication
 import com.example.onlinelearning.viewmodel.SignUpViewModel
 
 @Composable
@@ -184,25 +185,27 @@ fun SignUpScreen(
                     }
 
                     CustomSpannableString(
-                        SpannedString(
-                            text = getString(R.string.already_have_an_account),
-                            fontWeight = FontWeights.FOUR_HUNDRED,
-                            color = BlueText,
-                            size = 13.sp
-                        ),
-                        SpannedString(
-                            text = getString(R.string.sign_in),
-                            fontWeight = FontWeights.FIVE_HUNDRED,
-                            color = BaseGreen,
-                            size = 13.sp,
-                            onClick = {
-                                navHostController.navigate(Authentication.SignIn.route) {
-                                    popUpTo(Authentication.SignInSignUp.route) {
-                                        inclusive = false
+                        spannedStrings = arrayOf(
+                            SpannedString(
+                                text = getString(R.string.already_have_an_account),
+                                fontWeight = FontWeights.FOUR_HUNDRED,
+                                color = BlueText,
+                                size = 13.sp
+                            ),
+                            SpannedString(
+                                text = getString(R.string.sign_in),
+                                fontWeight = FontWeights.FIVE_HUNDRED,
+                                color = BaseGreen,
+                                size = 13.sp,
+                                onClick = {
+                                    navHostController.navigate(Authentication.SignIn.route) {
+                                        popUpTo(Authentication.SignInSignUp.route) {
+                                            inclusive = false
+                                        }
+                                        launchSingleTop = true
                                     }
-                                    launchSingleTop = true
                                 }
-                            }
+                            )
                         )
                     )
                 }

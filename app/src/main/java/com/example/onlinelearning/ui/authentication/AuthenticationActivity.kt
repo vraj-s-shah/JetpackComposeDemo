@@ -10,7 +10,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.onlinelearning.ui.base.BaseComposeActivity
 import com.example.onlinelearning.ui.home.HomeActivity
 import com.example.onlinelearning.utils.Constants
+import com.example.onlinelearning.utils.extensions.obtainViewModel
 import com.example.onlinelearning.utils.extensions.startWithIntArgsAndFinish
+import com.example.onlinelearning.utils.navigation.Authentication
+import com.example.onlinelearning.viewmodel.ForgotAndResetPasswordViewModel
 
 class AuthenticationActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +36,7 @@ fun AuthenticationScreens(
     navHostController: NavHostController,
     onStartHomeActivity: (Int) -> Unit
 ) {
+    val forgotAndResetPasswordViewModel = obtainViewModel<ForgotAndResetPasswordViewModel>()
     NavHost(
         navController = navHostController,
         startDestination = Authentication.SignInSignUp.route
@@ -46,14 +50,18 @@ fun AuthenticationScreens(
         composable(Authentication.SignUp.route) {
             SignUpScreen(navHostController, onStartHomeActivity)
         }
+        composable(Authentication.ForgotPassword.route) {
+            ForgotPasswordScreen(navHostController, forgotAndResetPasswordViewModel)
+        }
+        composable(Authentication.Otp.route) {
+            OtpScreen(navHostController, forgotAndResetPasswordViewModel)
+        }
+        composable(Authentication.ResetPassword.route) {
+            ResetPasswordScreen(
+                navHostController,
+                forgotAndResetPasswordViewModel,
+                onStartHomeActivity
+            )
+        }
     }
-}
-
-sealed class Authentication(val route: String) {
-    object SignInSignUp : Authentication("signInSignUp")
-    object SignIn : Authentication("signIn")
-    object SignUp : Authentication("signUp")
-    object Otp : Authentication("otp")
-    object ForgotPassword : Authentication("forgotPassword")
-    object ResetPassword : Authentication("resetPassword")
 }

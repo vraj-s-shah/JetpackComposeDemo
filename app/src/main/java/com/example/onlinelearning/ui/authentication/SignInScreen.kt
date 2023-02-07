@@ -50,6 +50,7 @@ import com.example.onlinelearning.utils.extensions.getString
 import com.example.onlinelearning.utils.extensions.navigateWithNoBackStack
 import com.example.onlinelearning.utils.extensions.obtainViewModel
 import com.example.onlinelearning.utils.extensions.showShortToast
+import com.example.onlinelearning.utils.navigation.Authentication
 import com.example.onlinelearning.viewmodel.SignInViewModel
 
 @Composable
@@ -145,7 +146,14 @@ fun SignInScreen(
                     lineHeight = 28.sp,
                     textAlign = TextAlign.Right,
                     color = BaseGreen,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable(
+                            interactionSource = MutableInteractionSource(),
+                            indication = null
+                        ) {
+                            navHostController.navigate(Authentication.ForgotPassword.route)
+                        }
                 )
             }
 
@@ -181,25 +189,27 @@ fun SignInScreen(
                 }
 
                 CustomSpannableString(
-                    SpannedString(
-                        text = getString(R.string.dont_have_an_account),
-                        fontWeight = FontWeights.FOUR_HUNDRED,
-                        color = BlueText,
-                        size = 13.sp
-                    ),
-                    SpannedString(
-                        text = getString(R.string.sign_up),
-                        fontWeight = FontWeights.FIVE_HUNDRED,
-                        color = BaseGreen,
-                        size = 13.sp,
-                        onClick = {
-                            navHostController.navigate(Authentication.SignUp.route) {
-                                popUpTo(Authentication.SignInSignUp.route) {
-                                    inclusive = false
+                    spannedStrings = arrayOf(
+                        SpannedString(
+                            text = getString(R.string.dont_have_an_account),
+                            fontWeight = FontWeights.FOUR_HUNDRED,
+                            color = BlueText,
+                            size = 13.sp
+                        ),
+                        SpannedString(
+                            text = getString(R.string.sign_up),
+                            fontWeight = FontWeights.FIVE_HUNDRED,
+                            color = BaseGreen,
+                            size = 13.sp,
+                            onClick = {
+                                navHostController.navigate(Authentication.SignUp.route) {
+                                    popUpTo(Authentication.SignInSignUp.route) {
+                                        inclusive = false
+                                    }
+                                    launchSingleTop = true
                                 }
-                                launchSingleTop = true
                             }
-                        }
+                        )
                     )
                 )
             }

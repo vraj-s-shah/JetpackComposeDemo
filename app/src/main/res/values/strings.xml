@@ -32,4 +32,20 @@
     <string name="wrong_password">Entered password is wrong</string>
     <string name="user_doesnt_exists">Cannot sign in. User %1$s not found</string>
     <string name="user_already_added">Cannot add user. User %1$s already exists</string>
+    <string name="forgot_password_title">Forgot Password</string>
+    <string name="email_required_description">We need your registration email to send you password reset code!</string>
+    <string name="send_code_button_text">Send Code</string>
+    <string name="cannot_find_email">Cannot find email</string>
+    <string name="verification_code_title">Verification Code</string>
+    <string name="enter_the_code_description">Enter the code we sent to your registered mail</string>
+    <string name="did_not_receive_a_code">Didn\'t receive a code?&#160;</string>
+    <string name="resend_code">Resend Code</string>
+    <string name="resend_code_toast_message">It is a demo project please enter dummy code</string>
+    <string name="confirm">Confirm</string>
+    <string name="empty_otp">Please enter full OTP</string>
+    <string name="reset_password_title">Reset Password</string>
+    <string name="enter_new_password">Enter a new password</string>
+    <string name="new_password_placeholder">New Password</string>
+    <string name="confirm_password_placeholder">Confirm Password</string>
+    <string name="password_not_matching">Passwords are not matching</string>
 </resources>

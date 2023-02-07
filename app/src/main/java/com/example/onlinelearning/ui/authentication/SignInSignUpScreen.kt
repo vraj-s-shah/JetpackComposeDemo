@@ -18,6 +18,7 @@ import com.example.onlinelearning.R
 import com.example.onlinelearning.ui.base.BaseButton
 import com.example.onlinelearning.ui.theme.BlueText
 import com.example.onlinelearning.ui.theme.LightGray
+import com.example.onlinelearning.utils.navigation.Authentication
 
 @Composable
 fun SignInSignUpScreen(navHostController: NavHostController) {

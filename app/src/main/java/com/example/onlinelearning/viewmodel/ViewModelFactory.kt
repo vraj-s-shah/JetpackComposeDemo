@@ -36,6 +36,11 @@ class ViewModelFactory private constructor(
                     mAppDatabase.usersDao()
                 )
             }
+            isAssignableFrom(ForgotAndResetPasswordViewModel::class.java) -> {
+                ForgotAndResetPasswordViewModel(
+                    mAppDatabase.usersDao()
+                )
+            }
             else -> {
                 throw IllegalArgumentException(
                     "Unknown ViewModel class: ${modelClass.name}"
