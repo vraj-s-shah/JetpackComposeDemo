@@ -2,6 +2,7 @@ package com.example.onlinelearning.utils
 
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -26,6 +27,7 @@ data class SpannedString(
 
 @Composable
 fun CustomSpannableString(
+    modifier: Modifier = Modifier,
     vararg spannedStrings: SpannedString
 ) {
     val annotatedString = buildAnnotatedString {
@@ -46,7 +48,10 @@ fun CustomSpannableString(
         }
     }
 
-    ClickableText(annotatedString) {
+    ClickableText(
+        text = annotatedString,
+        modifier = modifier
+    ) {
         spannedStrings.forEachIndexed { index, string ->
             annotatedString
                 .getStringAnnotations(string.text, it, it)
