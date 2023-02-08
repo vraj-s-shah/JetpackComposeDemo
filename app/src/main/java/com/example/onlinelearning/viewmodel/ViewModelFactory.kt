@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.onlinelearning.data.local.AppDatabase
-import com.example.onlinelearning.utils.SharedPrefs
+import com.example.onlinelearning.utils.prefs.SharedPrefs
 
 class ViewModelFactory private constructor(
     private val mApplication: Application,
@@ -28,17 +28,20 @@ class ViewModelFactory private constructor(
             }
             isAssignableFrom(SignInViewModel::class.java) -> {
                 SignInViewModel(
-                    mAppDatabase.usersDao()
+                    mAppDatabase.usersDao(),
+                    mSharedPrefs
                 )
             }
             isAssignableFrom(SignUpViewModel::class.java) -> {
                 SignUpViewModel(
-                    mAppDatabase.usersDao()
+                    mAppDatabase.usersDao(),
+                    mSharedPrefs
                 )
             }
             isAssignableFrom(ForgotAndResetPasswordViewModel::class.java) -> {
                 ForgotAndResetPasswordViewModel(
-                    mAppDatabase.usersDao()
+                    mAppDatabase.usersDao(),
+                    mSharedPrefs
                 )
             }
             else -> {

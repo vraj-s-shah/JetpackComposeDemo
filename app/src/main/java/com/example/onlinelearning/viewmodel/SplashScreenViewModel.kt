@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.onlinelearning.ui.authentication.AuthenticationActivity
 import com.example.onlinelearning.ui.home.HomeActivity
 import com.example.onlinelearning.ui.onboarding.OnboardingActivity
-import com.example.onlinelearning.utils.SharedPrefs
+import com.example.onlinelearning.utils.prefs.SharedPrefs
 
 class SplashScreenViewModel(
     sharedPrefs: SharedPrefs

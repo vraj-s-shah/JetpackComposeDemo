@@ -127,19 +127,16 @@ fun ResetPasswordScreen(
                 viewModel.updatePassword {
                     with(context) {
                         when (it) {
-                            CredentialsValidator.EmptyCredentials -> {
+                            CredentialsValidator.EmptyCredentials ->
                                 showShortToast(getString(R.string.empty_credentials))
-                            }
-                            CredentialsValidator.InvalidPassword -> {
+                            CredentialsValidator.InvalidPassword ->
                                 showShortToast(getString(R.string.invalid_password))
-                            }
-                            CredentialsValidator.UserNotFound -> {
+                            CredentialsValidator.UserNotFound ->
                                 showShortToast(getString(R.string.user_doesnt_exists))
-                            }
-                            CredentialsValidator.WrongPassword -> {
+                            CredentialsValidator.WrongPassword ->
                                 showShortToast(getString(R.string.password_not_matching))
-                            }
-                            is CredentialsValidator.ValidCredentials -> {
+                            is CredentialsValidator.Success -> {
+                                viewModel.setUserLoggedIn()
                                 onStartHomeActivity(it.id)
                             }
                             else -> {}

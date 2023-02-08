@@ -7,11 +7,15 @@ import com.example.onlinelearning.data.local.repository.UserRepository
 import com.example.onlinelearning.utils.CredentialsValidator
 import com.example.onlinelearning.utils.extensions.isValidEmailAddress
 import com.example.onlinelearning.utils.extensions.isValidPassword
+import com.example.onlinelearning.utils.prefs.SharedPrefs
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class ForgotAndResetPasswordViewModel(mUsersDao: UsersDao) : ViewModel() {
+class ForgotAndResetPasswordViewModel(
+    private val mUsersDao: UsersDao,
+    private val mSharedPrefs: SharedPrefs
+) : ViewModel() {
 
     private val mUserRepository = UserRepository(mUsersDao)
     private var mRequestedUserId: Int? = null
@@ -122,12 +126,18 @@ class ForgotAndResetPasswordViewModel(mUsersDao: UsersDao) : ViewModel() {
                             mUserRepository.getUserWithId(it)?.let { userEntity ->
                                 val updatedUserEntity = userEntity.copy(password = newPassword.value)
                                 mUserRepository.updateUser(updatedUserEntity)
-                                CredentialsValidator.ValidCredentials(it)
+                                CredentialsValidator.Success(it)
                             } ?: CredentialsValidator.UserNotFound
                         } ?: CredentialsValidator.WrongPassword
                     }
                 }
             )
         }
+    }
+
+    fun setUserLoggedIn() {
+        val id = mRequestedUserId ?: return
+        mSharedPrefs.loggedInUserId = id
+        mSharedPrefs.isUserLoggedIn = true
     }
 }
