@@ -176,8 +176,10 @@ fun SignUpScreen(
                                         showShortToast(getString(R.string.user_already_added))
                                     null ->
                                         showShortToast(getString(R.string.please_try_again))
-                                    is CredentialsValidator.ValidCredentials ->
+                                    is CredentialsValidator.Success -> {
+                                        viewModel.setUserLoggedIn()
                                         onSignUpSuccess(it.id)
+                                    }
                                     else -> {}
                                 }
                             }

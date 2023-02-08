@@ -10,5 +10,5 @@ sealed class CredentialsValidator {
     object UserAlreadyExists : CredentialsValidator()
     object UserNotFound : CredentialsValidator()
     object WrongPassword : CredentialsValidator()
-    class ValidCredentials(val id: Int) : CredentialsValidator()
+    class Success(val id: Int) : CredentialsValidator()
 }

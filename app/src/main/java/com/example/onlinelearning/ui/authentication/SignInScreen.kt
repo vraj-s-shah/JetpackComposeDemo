@@ -179,7 +179,8 @@ fun SignInScreen(
                                     showShortToast(getString(R.string.user_doesnt_exists, name))
                                 CredentialsValidator.WrongPassword ->
                                     showShortToast(getString(R.string.wrong_password))
-                                is CredentialsValidator.ValidCredentials -> {
+                                is CredentialsValidator.Success -> {
+                                    viewModel.setUserLoggedIn()
                                     onSignInSuccess(it.id)
                                 }
                                 else -> {}

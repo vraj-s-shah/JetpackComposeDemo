@@ -8,11 +8,15 @@ import com.example.onlinelearning.data.local.repository.UserRepository
 import com.example.onlinelearning.utils.CredentialsValidator
 import com.example.onlinelearning.utils.extensions.isValidEmailAddress
 import com.example.onlinelearning.utils.extensions.isValidPassword
+import com.example.onlinelearning.utils.prefs.SharedPrefs
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class SignUpViewModel(usersDao: UsersDao) : ViewModel() {
+class SignUpViewModel(
+    private val usersDao: UsersDao,
+    private val mSharedPrefs: SharedPrefs
+) : ViewModel() {
 
     private val mUserRepository = UserRepository(usersDao)
 
@@ -62,12 +66,16 @@ class SignUpViewModel(usersDao: UsersDao) : ViewModel() {
                     !mUserRepository.addUser(mUserEntity) -> null
                     else -> {
                         mUserRepository.getUserId(name.value)?.let {
-                            CredentialsValidator.ValidCredentials(it)
+                            CredentialsValidator.Success(it)
                         }
                     }
                 }
             )
         }
+    }
+
+    fun setUserLoggedIn() {
+        mSharedPrefs.isUserLoggedIn = true
     }
 
     private fun isAnyCredentialEmpty(): Boolean =

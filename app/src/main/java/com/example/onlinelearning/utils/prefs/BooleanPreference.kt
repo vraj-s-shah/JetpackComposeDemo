@@ -1,4 +1,4 @@
-package com.example.onlinelearning.utils
+package com.example.onlinelearning.utils.prefs
 
 import android.content.SharedPreferences
 import androidx.core.content.edit

@@ -23,7 +23,7 @@ class AuthenticationActivity : BaseComposeActivity() {
             AuthenticationScreens(navHostController) { userId ->
                 startWithIntArgsAndFinish(
                     HomeActivity::class.java,
-                    Constants.loggedInUserIdKey to userId
+                    Constants.LOGGED_IN_USER_KEY to userId
                 )
             }
         }

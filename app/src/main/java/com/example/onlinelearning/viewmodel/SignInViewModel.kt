@@ -5,11 +5,15 @@ import androidx.lifecycle.viewModelScope
 import com.example.onlinelearning.data.local.dao.UsersDao
 import com.example.onlinelearning.data.local.repository.UserRepository
 import com.example.onlinelearning.utils.CredentialsValidator
+import com.example.onlinelearning.utils.prefs.SharedPrefs
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class SignInViewModel(mUsersDao: UsersDao) : ViewModel() {
+class SignInViewModel(
+    private val mUsersDao: UsersDao,
+    private val mSharedPrefs: SharedPrefs
+) : ViewModel() {
 
     private val mUserRepository = UserRepository(mUsersDao)
 
@@ -44,13 +48,17 @@ class SignInViewModel(mUsersDao: UsersDao) : ViewModel() {
                             if (password.value != it.password) {
                                 CredentialsValidator.WrongPassword
                             } else {
-                                CredentialsValidator.ValidCredentials(it.id)
+                                CredentialsValidator.Success(it.id)
                             }
                         } ?: CredentialsValidator.UserNotFound
                     }
                 }
             )
         }
+    }
+
+    fun setUserLoggedIn() {
+        mSharedPrefs.isUserLoggedIn = true
     }
 
     private fun isAnyCredentialEmpty(): Boolean =
