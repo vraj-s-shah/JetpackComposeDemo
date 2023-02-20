@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.view.WindowCompat
+import com.example.onlinelearning.ui.theme.BaseGreen
 
 abstract class BaseComposeActivity : ComponentActivity() {
 
@@ -31,5 +32,9 @@ abstract class BaseComposeActivity : ComponentActivity() {
                 )
             }
         }
+    }
+
+    protected fun setGreenStatusBar() {
+        window.statusBarColor = BaseGreen.toArgb()
     }
 }

@@ -25,7 +25,7 @@ import com.example.onlinelearning.viewmodel.ViewModelFactory
  * Runs the [block] with [Context]
  */
 @Composable
-private fun<T: Any> withAppContext(block: Context.() -> T): T =
+fun<T: Any> withAppContext(block: Context.() -> T): T =
     with(LocalContext.current) { block() }
 
 /**
@@ -34,13 +34,6 @@ private fun<T: Any> withAppContext(block: Context.() -> T): T =
 @Composable
 fun getString(@StringRes id: Int): String =
     withAppContext { getString(id) }
-
-/**
- * Get the string from string resource [id] with [arguments]
- */
-@Composable
-fun getStringWithArgs(@StringRes id: Int, vararg arguments: Any): String =
-    withAppContext { getString(id, arguments) }
 
 /**
  * Get the viewmodel for required type [T]
@@ -113,3 +106,7 @@ fun Modifier.shadow(
         }
     }
 )
+
+@Composable
+fun Float.toDp(): Dp =
+    withAppContext { Dp(this@toDp / resources.displayMetrics.density) }

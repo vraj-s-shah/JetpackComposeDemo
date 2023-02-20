@@ -16,7 +16,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun SplashScreen(viewModel: SplashScreenViewModel, onStartNewActivity: (Class<*>) -> Unit) {
     LaunchedEffect(true) {
-        delay(2000)
+        delay(1000)
         onStartNewActivity(viewModel.destination)
     }
 
