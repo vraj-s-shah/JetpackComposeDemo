@@ -8,10 +8,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.onlinelearning.R
@@ -32,10 +35,21 @@ fun SignInSignUpScreen(navHostController: NavHostController) {
             .padding(bottom = 53.dp, top = 90.dp)
             .verticalScroll(scrollState)
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_authentication_logo),
-            contentDescription = "authentication_logo"
-        )
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_authentication_logo),
+                contentDescription = "authentication_logo"
+            )
+            Text(
+                text = stringResource(R.string.authentication_logo_description),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onPrimary
+            )
+        }
 
         Image(
             painter = painterResource(id = R.drawable.ic_authentication_center),

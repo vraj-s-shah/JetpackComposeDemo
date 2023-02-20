@@ -14,7 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,7 +24,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.res.painterResource
@@ -34,6 +33,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.onlinelearning.R
+import com.example.onlinelearning.ui.theme.Shapes
 import com.example.onlinelearning.utils.navigation.BottomNavigationItem
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
@@ -67,8 +67,8 @@ fun BottomNavigationBar(
             modifier = modifier
                 .fillMaxWidth()
                 .height(70.dp)
-                .clip(RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp))
-                .background(Color.White)
+                .clip(Shapes.cornerRadiusTopThirty)
+                .background(MaterialTheme.colorScheme.primary)
         ) {
             bottomNavigationItems.forEach {
                 val isSelected = it.route == backStackEntry.value?.destination?.route

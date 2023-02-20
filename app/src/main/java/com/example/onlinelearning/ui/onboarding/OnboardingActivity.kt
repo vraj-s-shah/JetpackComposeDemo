@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -46,11 +47,9 @@ import com.example.onlinelearning.ui.base.BaseComposeActivity
 import com.example.onlinelearning.ui.base.TopBar
 import com.example.onlinelearning.ui.home.HomeActivity
 import com.example.onlinelearning.ui.theme.BaseGreen
-import com.example.onlinelearning.ui.theme.BlueText
-import com.example.onlinelearning.ui.theme.FontWeights
 import com.example.onlinelearning.ui.theme.LightGrayText
+import com.example.onlinelearning.ui.theme.OnlineLearningTheme
 import com.example.onlinelearning.ui.theme.ProgressCircleBackground
-import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
 import com.example.onlinelearning.utils.extensions.startAndFinish
 import com.example.onlinelearning.viewmodel.OnboardingViewModel
 import com.example.onlinelearning.viewmodel.obtainViewModel
@@ -66,57 +65,60 @@ class OnboardingActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val scope = rememberCoroutineScope()
-            val pagerState = rememberPagerState(0)
-            val viewModel = obtainViewModel<OnboardingViewModel>()
-            val data = viewModel.data
-            val currentPage by viewModel.currentPage.collectAsState()
-            val currentSweepAngle by viewModel.currentSweepAngle.collectAsState(0f)
-            val rightButtonText by viewModel.topBarRightButtonText.collectAsState("")
-            val animatedTimerArc by animateFloatAsState(
-                currentSweepAngle,
-                tween(durationMillis = 1000, easing = LinearEasing)
-            )
+            OnlineLearningTheme {
+                val scope = rememberCoroutineScope()
+                val pagerState = rememberPagerState(0)
+                val viewModel = obtainViewModel<OnboardingViewModel>()
+                val data = viewModel.data
+                val currentPage by viewModel.currentPage.collectAsState()
+                val currentSweepAngle by viewModel.currentSweepAngle.collectAsState(0f)
+                val rightButtonText by viewModel.topBarRightButtonText.collectAsState("")
+                val animatedTimerArc by animateFloatAsState(
+                    currentSweepAngle,
+                    tween(durationMillis = 1000, easing = LinearEasing)
+                )
 
-            Scaffold(
-                topBar = {
-                    TopBar(
-                        onBackButtonClicked = { finish() },
-                        onRightButtonClicked = { viewModel.checkAndStartNextActivity() },
-                        rightButtonText = rightButtonText
-                    )
-                }
-            ) {
-                Box(
-                    contentAlignment = Alignment.BottomCenter,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(it)
+                Scaffold(
+                    topBar = {
+                        TopBar(
+                            onBackButtonClicked = { finish() },
+                            onRightButtonClicked = { viewModel.checkAndStartNextActivity() },
+                            rightButtonText = rightButtonText
+                        )
+                    }
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.SpaceBetween,
+                    Box(
+                        contentAlignment = Alignment.BottomCenter,
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(bottom = 50.dp)
+                            .background(MaterialTheme.colorScheme.primary)
+                            .padding(it)
                     ) {
-                        OnboardingPager(
-                            data = data,
-                            pagerState = pagerState,
-                            modifier = Modifier.padding(top = 110.dp)
-                        ) { page ->
-                            viewModel.onPageChange(page)
-                        }
-                        ProgressCircle(
-                            progressArcSweepAngle = animatedTimerArc,
-                            modifier = Modifier.size(80.dp)
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.SpaceBetween,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(bottom = 50.dp)
                         ) {
-                            val isUserOnLastPage = currentPage == data.size - 1
-                            if (isUserOnLastPage) {
-                                viewModel.checkAndStartNextActivity()
-                            } else {
-                                viewModel.onPageChange(viewModel.currentPage.value + 1)
-                                scope.launch { pagerState.animateScrollToPage(currentPage) }
+                            OnboardingPager(
+                                data = data,
+                                pagerState = pagerState,
+                                modifier = Modifier.padding(top = 110.dp)
+                            ) { page ->
+                                viewModel.onPageChange(page)
+                            }
+                            ProgressCircle(
+                                progressArcSweepAngle = animatedTimerArc,
+                                modifier = Modifier.size(80.dp)
+                            ) {
+                                val isUserOnLastPage = currentPage == data.size - 1
+                                if (isUserOnLastPage) {
+                                    viewModel.checkAndStartNextActivity()
+                                } else {
+                                    viewModel.onPageChange(viewModel.currentPage.value + 1)
+                                    scope.launch { pagerState.animateScrollToPage(currentPage) }
+                                }
                             }
                         }
                     }
@@ -170,10 +172,9 @@ fun OnboardingPager(
             Spacer(modifier = Modifier.height(64.dp))
             Text(
                 text = currentData.title,
-                style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
-                fontSize = 25.sp,
+                style = MaterialTheme.typography.displayMedium,
                 lineHeight = 33.sp,
-                color = BlueText,
+                color = MaterialTheme.colorScheme.onPrimary,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -182,8 +183,7 @@ fun OnboardingPager(
             Spacer(modifier = Modifier.height(13.dp))
             Text(
                 text = currentData.description,
-                style = getPoppinsTextStyleFor(FontWeights.FOUR_HUNDRED),
-                fontSize = 15.sp,
+                style = MaterialTheme.typography.titleSmall,
                 lineHeight = 26.sp,
                 color = LightGrayText,
                 textAlign = TextAlign.Center,

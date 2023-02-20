@@ -64,4 +64,5 @@
     <string name="number_of_quiz">%1$d Quiz</string>
     <string name="choice_your_courses">Choice your courses</string>
     <string name="number_of_enrolls">%1$d+ Enrolled</string>
+    <string name="authentication_logo_description">APP BY KAWSAR AHMED</string>
 </resources>

@@ -1,10 +1,11 @@
 package com.example.onlinelearning.ui.theme
 
-import androidx.compose.material.Typography
+import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import com.example.onlinelearning.R
 
 val PoppinsFontFamily = FontFamily(
@@ -19,41 +20,80 @@ val PoppinsFontFamily = FontFamily(
     Font(R.font.poppins_black, FontWeight.Black)
 )
 
-private val PoppinsTypography = Typography(
-    defaultFontFamily = PoppinsFontFamily,
-    h1 = TextStyle(fontWeight = FontWeight.Black),
-    h2 = TextStyle(fontWeight = FontWeight.Bold),
-    h3 = TextStyle(fontWeight = FontWeight.SemiBold),
-    h4 = TextStyle(fontWeight = FontWeight.Medium),
-    h5 = TextStyle(fontWeight = FontWeight.Normal),
-    h6 = TextStyle(fontWeight = FontWeight.Thin),
+val PoppinsTypography = Typography(
+    displayLarge = TextStyle(
+        fontFamily = PoppinsFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 30.sp
+    ),
+    displayMedium = TextStyle(
+        fontFamily = PoppinsFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 25.sp
+    ),
+    displaySmall = TextStyle(
+        fontFamily = PoppinsFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 27.sp
+    ),
+    headlineLarge = TextStyle(
+        fontFamily = PoppinsFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 19.sp
+    ),
+    headlineMedium = TextStyle(
+        fontFamily = PoppinsFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 18.sp
+    ),
+    headlineSmall = TextStyle(
+        fontFamily = PoppinsFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 18.sp
+    ),
+    titleLarge = TextStyle(
+        fontFamily = PoppinsFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
+    ),
+    titleMedium = TextStyle(
+        fontFamily = PoppinsFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 15.sp
+    ),
+    titleSmall = TextStyle(
+        fontFamily = PoppinsFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 15.sp
+    ),
+    bodyLarge = TextStyle(
+        fontFamily = PoppinsFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 13.sp
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = PoppinsFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 13.sp
+    ),
+    bodySmall = TextStyle(
+        fontFamily = PoppinsFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 12.sp
+    ),
+    labelLarge = TextStyle(
+        fontFamily = PoppinsFontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 10.sp
+    ),
+    labelMedium = TextStyle(
+        fontFamily = PoppinsFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 10.sp
+    ),
+    labelSmall = TextStyle(
+        fontFamily = PoppinsFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 7.sp
+    )
 )
-
-fun getPoppinsTextStyleFor(weight: FontWeights): TextStyle =
-    when (weight) {
-        FontWeights.HUNDRED -> PoppinsTypography.h6
-        FontWeights.FOUR_HUNDRED -> PoppinsTypography.h5
-        FontWeights.FIVE_HUNDRED -> PoppinsTypography.h4
-        FontWeights.SIX_HUNDRED -> PoppinsTypography.h3
-        FontWeights.SEVEN_HUNDRED -> PoppinsTypography.h2
-        FontWeights.NINE_HUNDRED -> PoppinsTypography.h1
-    }
-
-fun getFontWeightFor(weight: FontWeights): FontWeight =
-    when (weight) {
-        FontWeights.HUNDRED -> FontWeight.Thin
-        FontWeights.FOUR_HUNDRED -> FontWeight.Normal
-        FontWeights.FIVE_HUNDRED -> FontWeight.Medium
-        FontWeights.SIX_HUNDRED -> FontWeight.SemiBold
-        FontWeights.SEVEN_HUNDRED -> FontWeight.Bold
-        FontWeights.NINE_HUNDRED -> FontWeight.Black
-    }
-
-enum class FontWeights {
-    HUNDRED,
-    FOUR_HUNDRED,
-    FIVE_HUNDRED,
-    SIX_HUNDRED,
-    SEVEN_HUNDRED,
-    NINE_HUNDRED
-}

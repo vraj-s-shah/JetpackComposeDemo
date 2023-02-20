@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,10 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.onlinelearning.R
-import com.example.onlinelearning.ui.theme.BlueText
-import com.example.onlinelearning.ui.theme.FontWeights
 import com.example.onlinelearning.ui.theme.LightGray
-import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
 
 @Composable
 fun TopBar(
@@ -32,6 +30,7 @@ fun TopBar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.primary)
             .padding(horizontal = 25.dp)
             .padding(top = 20.dp)
     ) {
@@ -52,20 +51,18 @@ fun TopBar(
         centerText?.let {
             Text(
                 text = it,
-                color = BlueText,
-                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.onPrimary,
                 lineHeight = 40.sp,
-                style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
+                style = MaterialTheme.typography.headlineMedium,
                 modifier = Modifier.align(Alignment.Center)
             )
         }
         rightButtonText?.let {
             Text(
                 text = it,
-                color = BlueText,
-                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.onPrimary,
                 lineHeight = 26.sp,
-                style = getPoppinsTextStyleFor(FontWeights.FOUR_HUNDRED),
+                style = MaterialTheme.typography.headlineSmall,
                 modifier = Modifier
                     .clickable { onRightButtonClicked() }
                     .align(Alignment.CenterEnd)

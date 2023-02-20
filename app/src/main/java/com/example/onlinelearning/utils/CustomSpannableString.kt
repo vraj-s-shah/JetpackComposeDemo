@@ -5,22 +5,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.sp
-import com.example.onlinelearning.ui.theme.FontWeights
-import com.example.onlinelearning.ui.theme.PoppinsFontFamily
-import com.example.onlinelearning.ui.theme.getFontWeightFor
 
 data class SpannedString(
     val text: String,
-    val fontFamily: FontFamily = PoppinsFontFamily,
-    val fontWeight: FontWeights = FontWeights.FOUR_HUNDRED,
     val color: Color = Color.Black,
-    val size: TextUnit = 15.sp,
+    val textStyle: TextStyle = TextStyle(),
     val fontStyle: FontStyle = FontStyle.Normal,
     val onClick: () -> Unit = { }
 )
@@ -36,9 +29,9 @@ fun CustomSpannableString(
                 pushStringAnnotation(text, "")
                 withStyle(
                     SpanStyle(
-                        fontFamily = fontFamily,
-                        fontWeight = getFontWeightFor(fontWeight),
-                        fontSize = size,
+                        fontFamily = textStyle.fontFamily,
+                        fontWeight = textStyle.fontWeight,
+                        fontSize = textStyle.fontSize,
                         color = color,
                         fontStyle = fontStyle
                     )

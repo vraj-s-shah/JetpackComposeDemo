@@ -8,17 +8,18 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActionScope
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -33,6 +34,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -44,11 +46,9 @@ import com.example.onlinelearning.ui.base.BaseButton
 import com.example.onlinelearning.ui.base.TopBar
 import com.example.onlinelearning.ui.theme.BaseGreen
 import com.example.onlinelearning.ui.theme.BlueText
-import com.example.onlinelearning.ui.theme.FontWeights
 import com.example.onlinelearning.ui.theme.LightGray
 import com.example.onlinelearning.ui.theme.PoppinsFontFamily
-import com.example.onlinelearning.ui.theme.getFontWeightFor
-import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
+import com.example.onlinelearning.ui.theme.Shapes
 import com.example.onlinelearning.utils.CustomSpannableString
 import com.example.onlinelearning.utils.SpannedString
 import com.example.onlinelearning.utils.extensions.ShowShortToast
@@ -77,7 +77,8 @@ fun OtpScreen(
         Column(
             verticalArrangement = Arrangement.spacedBy(95.dp),
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.primary)
                 .padding(padding)
                 .padding(top = 20.dp)
                 .padding(horizontal = 25.dp)
@@ -91,10 +92,9 @@ fun OtpScreen(
              */
             Text(
                 text = stringResource(R.string.enter_the_code_description),
-                style = getPoppinsTextStyleFor(FontWeights.FOUR_HUNDRED),
-                fontSize = 16.sp,
+                style = MaterialTheme.typography.titleLarge,
                 lineHeight = 28.sp,
-                color = BlueText
+                color = MaterialTheme.colorScheme.onPrimary
             )
 
             /**
@@ -115,17 +115,13 @@ fun OtpScreen(
                         modifier = Modifier.align(Alignment.CenterEnd),
                         SpannedString(
                             text = stringResource(R.string.did_not_receive_a_code),
-                            fontFamily = PoppinsFontFamily,
-                            fontWeight = FontWeights.FOUR_HUNDRED,
-                            color = BlueText,
-                            size = 13.sp
+                            textStyle = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onPrimary
                         ),
                         SpannedString(
                             text = stringResource(R.string.resend_code),
-                            fontFamily = PoppinsFontFamily,
-                            fontWeight = FontWeights.FIVE_HUNDRED,
+                            textStyle = MaterialTheme.typography.bodyLarge,
                             color = BaseGreen,
-                            size = 13.sp,
                             onClick = {
                                 with(context) {
                                     showShortToast(getString(R.string.resend_code_toast_message))
@@ -273,7 +269,7 @@ fun SingleOtpBlock(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .size(52.dp)
-            .clip(RoundedCornerShape(10.dp))
+            .clip(Shapes.cornerRadiusTen)
             .background(LightGray)
             .padding(top = 5.dp)
     ) {
@@ -288,7 +284,7 @@ fun SingleOtpBlock(
             },
             textStyle = TextStyle(
                 fontFamily = PoppinsFontFamily,
-                fontWeight = getFontWeightFor(FontWeights.FIVE_HUNDRED),
+                fontWeight = FontWeight.Medium,
                 fontSize = 27.sp,
                 lineHeight = 20.sp,
                 color = BlueText,

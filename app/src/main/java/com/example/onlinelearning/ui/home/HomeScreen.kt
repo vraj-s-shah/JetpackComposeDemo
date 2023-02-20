@@ -22,9 +22,9 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -46,19 +46,17 @@ import com.example.onlinelearning.data.model.Course
 import com.example.onlinelearning.ui.base.BaseLinearProgressIndicator
 import com.example.onlinelearning.ui.base.BaseSearchView
 import com.example.onlinelearning.ui.theme.BaseGreen
-import com.example.onlinelearning.ui.theme.BlueText
 import com.example.onlinelearning.ui.theme.CourseCardGradientEnd
-import com.example.onlinelearning.ui.theme.FontWeights
 import com.example.onlinelearning.ui.theme.LightGrayText
-import com.example.onlinelearning.ui.theme.PoppinsFontFamily
+import com.example.onlinelearning.ui.theme.Shapes
 import com.example.onlinelearning.ui.theme.SliderProgressGradientEnd
 import com.example.onlinelearning.ui.theme.SliderProgressGradientStart
 import com.example.onlinelearning.ui.theme.WhiteO20
 import com.example.onlinelearning.ui.theme.WhiteO70
-import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
 import com.example.onlinelearning.utils.CustomSpannableString
 import com.example.onlinelearning.utils.SpannedString
 import com.example.onlinelearning.utils.extensions.getText
+import com.example.onlinelearning.utils.extensions.shadow
 import com.example.onlinelearning.viewmodel.HomeViewModel
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
@@ -121,7 +119,7 @@ private fun TitleBlock(
             contentScale = ContentScale.FillBounds,
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(bottomStart = 25.dp, bottomEnd = 25.dp))
+                .clip(Shapes.cornerRadiusBottomTwentyFive)
                 .background(BaseGreen)
         )
         Column(
@@ -141,15 +139,13 @@ private fun TitleBlock(
                             R.string.greeting_title,
                             userData?.username ?: "User"
                         ),
-                        style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
-                        fontSize = 30.sp,
+                        style = MaterialTheme.typography.displayLarge,
                         lineHeight = 20.sp,
                         color = Color.White
                     )
                     Text(
                         text = stringResource(R.string.lets_start_learning),
-                        style = getPoppinsTextStyleFor(FontWeights.FOUR_HUNDRED),
-                        fontSize = 19.sp,
+                        style = MaterialTheme.typography.headlineLarge,
                         lineHeight = 30.sp,
                         color = Color.White
                     )
@@ -189,18 +185,15 @@ private fun OngoingCourseBlock(
         ) {
             Text(
                 text = stringResource(R.string.ongoing_course),
-                style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
-                fontSize = 18.sp,
-                color = BlueText
+                style = MaterialTheme.typography.headlineMedium,
+                color = MaterialTheme.colorScheme.onPrimary
             )
             CustomSpannableString(
                 Modifier,
                 SpannedString(
                     text = stringResource(R.string.view_all),
-                    fontFamily = PoppinsFontFamily,
-                    fontWeight = FontWeights.FOUR_HUNDRED,
-                    color = BaseGreen,
-                    size = 15.sp
+                    textStyle = MaterialTheme.typography.titleSmall,
+                    color = BaseGreen
                 )
             )
         }
@@ -258,7 +251,7 @@ private fun RectangularCourseItem(
                 Box(
                     modifier = Modifier
                         .size(44.dp)
-                        .clip(RoundedCornerShape(10.dp))
+                        .clip(Shapes.cornerRadiusTen)
                         .background(Color.White)
                 ) {
                     Image(
@@ -271,8 +264,7 @@ private fun RectangularCourseItem(
                 }
                 Text(
                     text = course.name.getText(),
-                    style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
-                    fontSize = 15.sp,
+                    style = MaterialTheme.typography.titleMedium,
                     lineHeight = 22.sp,
                     color = Color.White,
                     modifier = Modifier
@@ -303,9 +295,8 @@ private fun RectangularCourseItem(
                 ) {
                     Text(
                         text = stringResource(R.string.number_of_lessons, numberOfLessonsCompleted),
-                        style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
+                        style = MaterialTheme.typography.labelMedium,
                         color = WhiteO70,
-                        fontSize = 10.sp,
                         lineHeight = 15.sp
                     )
                     Text(
@@ -313,9 +304,8 @@ private fun RectangularCourseItem(
                             R.string.number_of_lessons,
                             course.numberOfLessons
                         ),
-                        style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
+                        style = MaterialTheme.typography.labelMedium,
                         color = WhiteO70,
-                        fontSize = 10.sp,
                         lineHeight = 15.sp
                     )
                 }
@@ -330,9 +320,8 @@ private fun RectangularCourseItem(
                         R.string.number_of_videos,
                         course.numberOfLessons
                     ),
-                    style = getPoppinsTextStyleFor(FontWeights.SIX_HUNDRED),
+                    style = MaterialTheme.typography.labelLarge,
                     color = Color.White,
-                    fontSize = 10.sp,
                     lineHeight = 15.sp
                 )
                 Text(
@@ -340,9 +329,8 @@ private fun RectangularCourseItem(
                         R.string.number_of_sheets,
                         course.numberOfSheet
                     ),
-                    style = getPoppinsTextStyleFor(FontWeights.SIX_HUNDRED),
+                    style = MaterialTheme.typography.labelLarge,
                     color = Color.White,
-                    fontSize = 10.sp,
                     lineHeight = 15.sp
                 )
                 Text(
@@ -350,9 +338,8 @@ private fun RectangularCourseItem(
                         R.string.number_of_quiz,
                         course.numberOfQuiz
                     ),
-                    style = getPoppinsTextStyleFor(FontWeights.SIX_HUNDRED),
+                    style = MaterialTheme.typography.labelLarge,
                     color = Color.White,
-                    fontSize = 10.sp,
                     lineHeight = 15.sp
                 )
             }
@@ -368,29 +355,26 @@ private fun ChoiceYourCoursesBlock(
     onCourseTypeChanged: (CourseType) -> Unit
 ) {
     Column(
-        verticalArrangement = Arrangement.spacedBy(20.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
         modifier = modifier
     ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(end = 30.dp)
+                .padding(end = 30.dp, top = 10.dp)
         ) {
             Text(
                 text = stringResource(R.string.choice_your_courses),
-                style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
-                fontSize = 18.sp,
-                color = BlueText
+                style = MaterialTheme.typography.headlineMedium,
+                color = MaterialTheme.colorScheme.onPrimary
             )
             CustomSpannableString(
                 Modifier,
                 SpannedString(
                     text = stringResource(R.string.view_all),
-                    fontFamily = PoppinsFontFamily,
-                    fontWeight = FontWeights.FOUR_HUNDRED,
-                    color = BaseGreen,
-                    size = 15.sp
+                    textStyle = MaterialTheme.typography.titleSmall,
+                    color = BaseGreen
                 )
             )
         }
@@ -412,7 +396,8 @@ private fun ChoiceYourCoursesBlock(
         ) {
             items(courses) {
                 CourseCard(
-                    modifier = Modifier.padding(end = 16.dp, bottom = 15.dp),
+                    modifier = Modifier
+                        .padding(end = 16.dp, top = 10.dp, bottom = 5.dp),
                     course = it
                 )
             }
@@ -428,13 +413,13 @@ fun CourseTypeItem(
 ) {
     Text(
         text = courseType.type,
-        style = getPoppinsTextStyleFor(
-            if (isSelected) FontWeights.FIVE_HUNDRED else FontWeights.FOUR_HUNDRED
-        ),
-        fontSize = 15.sp,
+        style = if (isSelected)
+            MaterialTheme.typography.titleMedium
+        else
+            MaterialTheme.typography.titleSmall,
         color = if (isSelected) Color.White else LightGrayText,
         modifier = Modifier
-            .clip(RoundedCornerShape(5.dp))
+            .clip(Shapes.cornerRadiusFive)
             .background(if (isSelected) BaseGreen else Color.Transparent)
             .padding(horizontal = 18.dp, vertical = 5.dp)
             .clickable(
@@ -450,12 +435,18 @@ private fun CourseCard(
     course: Course
 ) {
     Card(
-        modifier = modifier,
-        elevation = 10.dp,
-        shape = RoundedCornerShape(15.dp)
+        modifier = modifier
+            .shadow(
+                color = MaterialTheme.colorScheme.surface,
+                blurRadius = 30.dp,
+                offsetX = 6.dp
+            ),
+        shape = Shapes.cornerRadiusFifteen
     ) {
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.primary)
         ) {
             Box(
                 modifier = Modifier.height(95.dp)
@@ -465,13 +456,13 @@ private fun CourseCard(
                     contentDescription = "Course Image",
                     modifier = Modifier
                         .fillMaxSize()
-                        .clip(RoundedCornerShape(15.dp)),
+                        .clip(Shapes.cornerRadiusFifteen),
                     contentScale = ContentScale.FillBounds
                 )
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .clip(RoundedCornerShape(15.dp))
+                        .clip(Shapes.cornerRadiusFifteen)
                         .padding(top = 40.dp)
                         .background(
                             Brush.verticalGradient(
@@ -493,9 +484,8 @@ private fun CourseCard(
                 ) {
                     Text(
                         text = course.name.getText(),
-                        style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
-                        fontSize = 12.sp,
-                        color = BlueText,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onPrimary,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.weight(1f)
@@ -515,14 +505,12 @@ private fun CourseCard(
                 ) {
                     Text(
                         text = stringResource(R.string.number_of_lessons, course.numberOfLessons),
-                        style = getPoppinsTextStyleFor(FontWeights.FOUR_HUNDRED),
-                        fontSize = 7.sp,
+                        style = MaterialTheme.typography.labelSmall,
                         color = LightGrayText
                     )
                     Text(
                         text = stringResource(R.string.number_of_enrolls, course.numberOfEnrolls),
-                        style = getPoppinsTextStyleFor(FontWeights.FOUR_HUNDRED),
-                        fontSize = 7.sp,
+                        style = MaterialTheme.typography.labelSmall,
                         color = LightGrayText
                     )
                 }

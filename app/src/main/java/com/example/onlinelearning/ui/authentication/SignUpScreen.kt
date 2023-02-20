@@ -1,5 +1,6 @@
 package com.example.onlinelearning.ui.authentication
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -15,6 +16,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -35,9 +37,6 @@ import com.example.onlinelearning.ui.base.BaseButton
 import com.example.onlinelearning.ui.base.BaseTextField
 import com.example.onlinelearning.ui.base.TopBar
 import com.example.onlinelearning.ui.theme.BaseGreen
-import com.example.onlinelearning.ui.theme.BlueText
-import com.example.onlinelearning.ui.theme.FontWeights
-import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
 import com.example.onlinelearning.utils.CredentialsValidator
 import com.example.onlinelearning.utils.CustomSpannableString
 import com.example.onlinelearning.utils.SpannedString
@@ -79,6 +78,7 @@ fun SignUpScreen(
             verticalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier
                 .fillMaxSize()
+                .background(MaterialTheme.colorScheme.primary)
                 .padding(padding)
                 .padding(horizontal = 25.dp)
                 .verticalScroll(scrollState)
@@ -92,10 +92,9 @@ fun SignUpScreen(
              */
             Text(
                 text = stringResource(R.string.create_account_title),
-                style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
-                fontSize = 30.sp,
+                style = MaterialTheme.typography.displayLarge,
                 lineHeight = 39.sp,
-                color = BlueText
+                color = MaterialTheme.colorScheme.onPrimary
             )
 
             /**
@@ -187,15 +186,13 @@ fun SignUpScreen(
                         spannedStrings = arrayOf(
                             SpannedString(
                                 text = stringResource(R.string.already_have_an_account),
-                                fontWeight = FontWeights.FOUR_HUNDRED,
-                                color = BlueText,
-                                size = 13.sp
+                                textStyle = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onPrimary
                             ),
                             SpannedString(
                                 text = stringResource(R.string.sign_in),
-                                fontWeight = FontWeights.FIVE_HUNDRED,
+                                textStyle = MaterialTheme.typography.bodyLarge,
                                 color = BaseGreen,
-                                size = 13.sp,
                                 onClick = {
                                     navHostController.navigate(Authentication.SignIn.route) {
                                         popUpTo(Authentication.SignInSignUp.route) {
