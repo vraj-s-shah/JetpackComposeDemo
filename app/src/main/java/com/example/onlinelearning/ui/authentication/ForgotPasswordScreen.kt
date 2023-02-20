@@ -17,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -29,7 +30,6 @@ import com.example.onlinelearning.ui.base.TopBar
 import com.example.onlinelearning.ui.theme.BlueText
 import com.example.onlinelearning.ui.theme.FontWeights
 import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
-import com.example.onlinelearning.utils.extensions.getString
 import com.example.onlinelearning.utils.extensions.showShortToast
 import com.example.onlinelearning.utils.navigation.Authentication
 import com.example.onlinelearning.viewmodel.ForgotAndResetPasswordViewModel
@@ -47,7 +47,7 @@ fun ForgotPasswordScreen(
         topBar = {
             TopBar(
                 onBackButtonClicked = { navHostController.navigateUp() },
-                centerText = getString(R.string.forgot_password_title)
+                centerText = stringResource(R.string.forgot_password_title)
             )
         }
     ) { padding ->
@@ -66,7 +66,7 @@ fun ForgotPasswordScreen(
              * Email required text
              */
             Text(
-                text = getString(R.string.email_required_description),
+                text = stringResource(R.string.email_required_description),
                 style = getPoppinsTextStyleFor(FontWeights.FOUR_HUNDRED),
                 fontSize = 16.sp,
                 lineHeight = 28.sp,
@@ -81,7 +81,7 @@ fun ForgotPasswordScreen(
             BaseTextField(
                 textFieldValue = email,
                 onValueChanged = { viewModel.setEmail(it) },
-                placeholder = getString(R.string.placeholder_email),
+                placeholder = stringResource(R.string.placeholder_email),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Email,
                     imeAction = ImeAction.Done
@@ -96,7 +96,7 @@ fun ForgotPasswordScreen(
             /**
              * Send code button
              */
-            BaseButton(text = getString(R.string.send_code_button_text)) {
+            BaseButton(text = stringResource(R.string.send_code_button_text)) {
                 if (email.isNotEmpty()) {
                     viewModel.validateEmail { isValid ->
                         with(context) {
@@ -108,7 +108,7 @@ fun ForgotPasswordScreen(
                         }
                     }
                 } else {
-                    context.showShortToast(getString(R.string.empty_credentials))
+                    context.showShortToast(stringResource(R.string.empty_credentials))
                 }
             }
         }

@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -40,12 +41,11 @@ import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
 import com.example.onlinelearning.utils.CredentialsValidator
 import com.example.onlinelearning.utils.CustomSpannableString
 import com.example.onlinelearning.utils.SpannedString
-import com.example.onlinelearning.utils.extensions.getString
 import com.example.onlinelearning.utils.extensions.navigateWithNoBackStack
-import com.example.onlinelearning.utils.extensions.obtainViewModel
 import com.example.onlinelearning.utils.extensions.showShortToast
 import com.example.onlinelearning.utils.navigation.Authentication
 import com.example.onlinelearning.viewmodel.SignUpViewModel
+import com.example.onlinelearning.viewmodel.obtainViewModel
 
 @Composable
 fun SignUpScreen(
@@ -68,7 +68,7 @@ fun SignUpScreen(
                 onBackButtonClicked = {
                     navHostController.navigateWithNoBackStack(Authentication.SignInSignUp.route)
                 },
-                centerText = getString(R.string.sign_up_title)
+                centerText = stringResource(R.string.sign_up_title)
             )
         }
     ) { padding ->
@@ -91,7 +91,7 @@ fun SignUpScreen(
              * Create account title
              */
             Text(
-                text = getString(R.string.create_account_title),
+                text = stringResource(R.string.create_account_title),
                 style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
                 fontSize = 30.sp,
                 lineHeight = 39.sp,
@@ -110,7 +110,7 @@ fun SignUpScreen(
                 BaseTextField(
                     textFieldValue = name,
                     onValueChanged = { viewModel.setName(it) },
-                    placeholder = getString(R.string.placeholder_name),
+                    placeholder = stringResource(R.string.placeholder_name),
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Words,
                         keyboardType = KeyboardType.Text,
@@ -126,7 +126,7 @@ fun SignUpScreen(
                 BaseTextField(
                     textFieldValue = email,
                     onValueChanged = { viewModel.setEmail(it) },
-                    placeholder = getString(R.string.placeholder_email),
+                    placeholder = stringResource(R.string.placeholder_email),
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Email,
                         imeAction = ImeAction.Next
@@ -142,7 +142,7 @@ fun SignUpScreen(
                     textFieldValue = password,
                     onValueChanged = { viewModel.setPassword(it) },
                     hideText = isPasswordHidden,
-                    placeholder = getString(R.string.placeholder_password),
+                    placeholder = stringResource(R.string.placeholder_password),
                     rightButtonIcon = R.drawable.ic_password_eye,
                     onRightButtonClicked = { viewModel.setIsPasswordHidden(!isPasswordHidden) },
                     keyboardOptions = KeyboardOptions(
@@ -162,7 +162,7 @@ fun SignUpScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                 ) {
-                    BaseButton(text = getString(R.string.sign_up)) {
+                    BaseButton(text = stringResource(R.string.sign_up)) {
                         viewModel.validateUserCredentials {
                             context.apply {
                                 when (it) {
@@ -186,13 +186,13 @@ fun SignUpScreen(
                     CustomSpannableString(
                         spannedStrings = arrayOf(
                             SpannedString(
-                                text = getString(R.string.already_have_an_account),
+                                text = stringResource(R.string.already_have_an_account),
                                 fontWeight = FontWeights.FOUR_HUNDRED,
                                 color = BlueText,
                                 size = 13.sp
                             ),
                             SpannedString(
-                                text = getString(R.string.sign_in),
+                                text = stringResource(R.string.sign_in),
                                 fontWeight = FontWeights.FIVE_HUNDRED,
                                 color = BaseGreen,
                                 size = 13.sp,

@@ -31,6 +31,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -51,7 +52,6 @@ import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
 import com.example.onlinelearning.utils.CustomSpannableString
 import com.example.onlinelearning.utils.SpannedString
 import com.example.onlinelearning.utils.extensions.ShowShortToast
-import com.example.onlinelearning.utils.extensions.getString
 import com.example.onlinelearning.utils.extensions.moveLeft
 import com.example.onlinelearning.utils.extensions.moveRight
 import com.example.onlinelearning.utils.extensions.showShortToast
@@ -70,7 +70,7 @@ fun OtpScreen(
         topBar = {
             TopBar(
                 onBackButtonClicked = { navHostController.navigateUp() },
-                centerText = getString(R.string.verification_code_title)
+                centerText = stringResource(R.string.verification_code_title)
             )
         }
     ) { padding ->
@@ -90,7 +90,7 @@ fun OtpScreen(
              * Enter code description
              */
             Text(
-                text = getString(R.string.enter_the_code_description),
+                text = stringResource(R.string.enter_the_code_description),
                 style = getPoppinsTextStyleFor(FontWeights.FOUR_HUNDRED),
                 fontSize = 16.sp,
                 lineHeight = 28.sp,
@@ -114,14 +114,14 @@ fun OtpScreen(
                     CustomSpannableString(
                         modifier = Modifier.align(Alignment.CenterEnd),
                         SpannedString(
-                            text = getString(R.string.did_not_receive_a_code),
+                            text = stringResource(R.string.did_not_receive_a_code),
                             fontFamily = PoppinsFontFamily,
                             fontWeight = FontWeights.FOUR_HUNDRED,
                             color = BlueText,
                             size = 13.sp
                         ),
                         SpannedString(
-                            text = getString(R.string.resend_code),
+                            text = stringResource(R.string.resend_code),
                             fontFamily = PoppinsFontFamily,
                             fontWeight = FontWeights.FIVE_HUNDRED,
                             color = BaseGreen,
@@ -139,11 +139,11 @@ fun OtpScreen(
             /**
              * Confirm Button
              */
-            BaseButton(text = getString(R.string.confirm)) {
+            BaseButton(text = stringResource(R.string.confirm)) {
                 if (viewModel.isOtpValid) {
                     navHostController.navigate(Authentication.ResetPassword.route)
                 } else {
-                    ShowShortToast(getString(R.string.empty_otp))
+                    ShowShortToast(stringResource(R.string.empty_otp))
                 }
             }
         }

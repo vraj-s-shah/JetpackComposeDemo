@@ -51,9 +51,9 @@ import com.example.onlinelearning.ui.theme.FontWeights
 import com.example.onlinelearning.ui.theme.LightGrayText
 import com.example.onlinelearning.ui.theme.ProgressCircleBackground
 import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
-import com.example.onlinelearning.utils.extensions.obtainViewModel
 import com.example.onlinelearning.utils.extensions.startAndFinish
 import com.example.onlinelearning.viewmodel.OnboardingViewModel
+import com.example.onlinelearning.viewmodel.obtainViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState

@@ -58,7 +58,6 @@ import com.example.onlinelearning.ui.theme.WhiteO70
 import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
 import com.example.onlinelearning.utils.CustomSpannableString
 import com.example.onlinelearning.utils.SpannedString
-import com.example.onlinelearning.utils.extensions.getString
 import com.example.onlinelearning.utils.extensions.getText
 import com.example.onlinelearning.viewmodel.HomeViewModel
 import com.gowtham.ratingbar.RatingBar
@@ -165,7 +164,7 @@ private fun TitleBlock(
             BaseSearchView(
                 value = searchText,
                 onValueChange = onSearchTextChange,
-                placeHolder = getString(R.string.search_view_placeholder),
+                placeHolder = stringResource(R.string.search_view_placeholder),
                 modifier = Modifier
                     .padding(horizontal = 25.dp)
             )
@@ -189,7 +188,7 @@ private fun OngoingCourseBlock(
                 .padding(end = 30.dp)
         ) {
             Text(
-                text = getString(R.string.ongoing_course),
+                text = stringResource(R.string.ongoing_course),
                 style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
                 fontSize = 18.sp,
                 color = BlueText
@@ -197,7 +196,7 @@ private fun OngoingCourseBlock(
             CustomSpannableString(
                 Modifier,
                 SpannedString(
-                    text = getString(R.string.view_all),
+                    text = stringResource(R.string.view_all),
                     fontFamily = PoppinsFontFamily,
                     fontWeight = FontWeights.FOUR_HUNDRED,
                     color = BaseGreen,
@@ -379,7 +378,7 @@ private fun ChoiceYourCoursesBlock(
                 .padding(end = 30.dp)
         ) {
             Text(
-                text = getString(R.string.choice_your_courses),
+                text = stringResource(R.string.choice_your_courses),
                 style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
                 fontSize = 18.sp,
                 color = BlueText
@@ -387,7 +386,7 @@ private fun ChoiceYourCoursesBlock(
             CustomSpannableString(
                 Modifier,
                 SpannedString(
-                    text = getString(R.string.view_all),
+                    text = stringResource(R.string.view_all),
                     fontFamily = PoppinsFontFamily,
                     fontWeight = FontWeights.FOUR_HUNDRED,
                     color = BaseGreen,
