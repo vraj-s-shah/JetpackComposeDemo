@@ -2,13 +2,19 @@ package com.example.onlinelearning.ui.authentication
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.onlinelearning.ui.base.BaseComposeActivity
 import com.example.onlinelearning.ui.home.HomeActivity
+import com.example.onlinelearning.ui.theme.OnlineLearningTheme
 import com.example.onlinelearning.utils.Constants
 import com.example.onlinelearning.utils.extensions.startWithIntArgsAndFinish
 import com.example.onlinelearning.utils.navigation.Authentication
@@ -19,12 +25,20 @@ class AuthenticationActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val navHostController = rememberNavController()
-            AuthenticationScreens(navHostController) { userId ->
-                startWithIntArgsAndFinish(
-                    HomeActivity::class.java,
-                    Constants.LOGGED_IN_USER_KEY to userId
-                )
+            OnlineLearningTheme {
+                val navHostController = rememberNavController()
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.primary)
+                ) {
+                    AuthenticationScreens(navHostController) { userId ->
+                        startWithIntArgsAndFinish(
+                            HomeActivity::class.java,
+                            Constants.LOGGED_IN_USER_KEY to userId
+                        )
+                    }
+                }
             }
         }
         setWhiteStatusBar()

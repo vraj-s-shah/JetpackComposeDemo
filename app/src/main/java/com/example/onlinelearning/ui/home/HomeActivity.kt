@@ -2,9 +2,11 @@ package com.example.onlinelearning.ui.home
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -14,7 +16,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.onlinelearning.ui.base.BaseComposeActivity
 import com.example.onlinelearning.ui.base.BottomNavigationBar
-import com.example.onlinelearning.ui.theme.BottomNavigationBarShadowColor
+import com.example.onlinelearning.ui.theme.BaseGreen
+import com.example.onlinelearning.ui.theme.OnlineLearningTheme
 import com.example.onlinelearning.utils.Constants.LOGGED_IN_USER_KEY
 import com.example.onlinelearning.utils.extensions.shadow
 import com.example.onlinelearning.utils.navigation.BottomNavigationItem
@@ -26,26 +29,32 @@ class HomeActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val homeViewModel: HomeViewModel = obtainViewModel()
-            val navHostController = rememberNavController()
-            intent.getIntExtra(LOGGED_IN_USER_KEY, UNKNOWN_USER_ID)
-                .also { homeViewModel.fetchUserDataFor(it) }
+            OnlineLearningTheme(statusBarColor = BaseGreen) {
+                val homeViewModel: HomeViewModel = obtainViewModel()
+                val navHostController = rememberNavController()
+                intent.getIntExtra(LOGGED_IN_USER_KEY, UNKNOWN_USER_ID)
+                    .also { homeViewModel.fetchUserDataFor(it) }
 
-            Scaffold(
-                bottomBar = {
-                    BottomNavigationBar(
-                        navHostController = navHostController,
+                Scaffold(
+                    bottomBar = {
+                        BottomNavigationBar(
+                            navHostController = navHostController,
+                            modifier = Modifier
+                                .shadow(
+                                    color = MaterialTheme.colorScheme.surface,
+                                    blurRadius = 40.dp,
+                                    offsetY = 5.dp
+                                )
+                        )
+                    }
+                ) { padding ->
+                    Box(
                         modifier = Modifier
-                            .shadow(
-                                color = BottomNavigationBarShadowColor,
-                                blurRadius = 20.dp,
-                                offsetX = 6.dp
-                            )
-                    )
-                }
-            ) { padding ->
-                Box(modifier = Modifier.padding(padding)) {
-                    HomeScreens(navHostController, homeViewModel)
+                            .background(MaterialTheme.colorScheme.primary)
+                            .padding(padding)
+                    ) {
+                        HomeScreens(navHostController, homeViewModel)
+                    }
                 }
             }
         }

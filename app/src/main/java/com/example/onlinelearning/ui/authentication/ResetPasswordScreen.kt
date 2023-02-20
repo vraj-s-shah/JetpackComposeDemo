@@ -1,9 +1,11 @@
 package com.example.onlinelearning.ui.authentication
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -11,6 +13,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -29,9 +32,6 @@ import com.example.onlinelearning.R
 import com.example.onlinelearning.ui.base.BaseButton
 import com.example.onlinelearning.ui.base.BaseTextField
 import com.example.onlinelearning.ui.base.TopBar
-import com.example.onlinelearning.ui.theme.BlueText
-import com.example.onlinelearning.ui.theme.FontWeights
-import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
 import com.example.onlinelearning.utils.CredentialsValidator
 import com.example.onlinelearning.utils.extensions.showShortToast
 import com.example.onlinelearning.viewmodel.ForgotAndResetPasswordViewModel
@@ -61,7 +61,8 @@ fun ResetPasswordScreen(
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.primary)
                 .padding(padding)
                 .padding(top = 20.dp)
                 .padding(horizontal = 25.dp)
@@ -75,10 +76,9 @@ fun ResetPasswordScreen(
              */
             Text(
                 text = stringResource(R.string.enter_new_password),
-                style = getPoppinsTextStyleFor(FontWeights.FOUR_HUNDRED),
-                fontSize = 16.sp,
+                style = MaterialTheme.typography.titleLarge,
                 lineHeight = 28.sp,
-                color = BlueText,
+                color = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier.fillMaxWidth()
             )
 

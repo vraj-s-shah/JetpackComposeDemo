@@ -18,6 +18,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -40,10 +41,6 @@ import com.example.onlinelearning.ui.base.BaseLeftImageButton
 import com.example.onlinelearning.ui.base.BaseTextField
 import com.example.onlinelearning.ui.base.TopBar
 import com.example.onlinelearning.ui.theme.BaseGreen
-import com.example.onlinelearning.ui.theme.BlueText
-import com.example.onlinelearning.ui.theme.FontWeights
-import com.example.onlinelearning.ui.theme.getFontWeightFor
-import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
 import com.example.onlinelearning.utils.CredentialsValidator
 import com.example.onlinelearning.utils.CustomSpannableString
 import com.example.onlinelearning.utils.SpannedString
@@ -84,6 +81,7 @@ fun SignInScreen(
             verticalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier
                 .fillMaxSize()
+                .background(MaterialTheme.colorScheme.primary)
                 .padding(padding)
                 .padding(horizontal = 25.dp)
                 .verticalScroll(scrollState)
@@ -97,16 +95,17 @@ fun SignInScreen(
              */
             Text(
                 text = stringResource(R.string.welcome_back_title),
-                style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
-                fontSize = 30.sp,
+                style = MaterialTheme.typography.displayLarge,
                 lineHeight = 39.sp,
-                color = BlueText
+                color = MaterialTheme.colorScheme.onPrimary
             )
 
             /**
              * TextFields and forgot password button block
              */
-            Column {
+            Column(
+                horizontalAlignment = Alignment.End
+            ) {
                 BaseTextField(
                     textFieldValue = name,
                     onValueChanged = { viewModel.setName(it) },
@@ -141,13 +140,11 @@ fun SignInScreen(
 
                 Text(
                     text = stringResource(R.string.forgot_password),
-                    style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
-                    fontSize = 13.sp,
+                    style = MaterialTheme.typography.bodyLarge,
                     lineHeight = 28.sp,
                     textAlign = TextAlign.Right,
                     color = BaseGreen,
                     modifier = Modifier
-                        .fillMaxWidth()
                         .clickable(
                             interactionSource = MutableInteractionSource(),
                             indication = null
@@ -190,15 +187,13 @@ fun SignInScreen(
                     spannedStrings = arrayOf(
                         SpannedString(
                             text = stringResource(R.string.dont_have_an_account),
-                            fontWeight = FontWeights.FOUR_HUNDRED,
-                            color = BlueText,
-                            size = 13.sp
+                            textStyle = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onPrimary
                         ),
                         SpannedString(
                             text = stringResource(R.string.sign_up),
-                            fontWeight = FontWeights.FIVE_HUNDRED,
+                            textStyle = MaterialTheme.typography.bodyLarge,
                             color = BaseGreen,
-                            size = 13.sp,
                             onClick = {
                                 navHostController.navigate(Authentication.SignUp.route) {
                                     popUpTo(Authentication.SignInSignUp.route) {
@@ -234,19 +229,19 @@ fun GoogleOrAppleLoginBlock() {
             Box(
                 modifier = Modifier
                     .height(1.dp)
-                    .background(BlueText)
+                    .background(MaterialTheme.colorScheme.onPrimary)
                     .weight(1f)
             )
             Text(
                 text = stringResource(R.string.or_continue_with),
-                fontWeight = getFontWeightFor(FontWeights.FOUR_HUNDRED),
-                fontSize = 15.sp,
-                lineHeight = 15.sp
+                style = MaterialTheme.typography.titleSmall,
+                lineHeight = 15.sp,
+                color = MaterialTheme.colorScheme.onPrimary
             )
             Box(
                 modifier = Modifier
                     .height(1.dp)
-                    .background(BlueText)
+                    .background(MaterialTheme.colorScheme.onPrimary)
                     .weight(1f)
             )
         }

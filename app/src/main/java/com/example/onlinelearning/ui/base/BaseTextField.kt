@@ -9,11 +9,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,10 +30,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.onlinelearning.ui.theme.BaseGreen
-import com.example.onlinelearning.ui.theme.FontWeights
 import com.example.onlinelearning.ui.theme.LightGray
 import com.example.onlinelearning.ui.theme.PoppinsFontFamily
-import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
+import com.example.onlinelearning.ui.theme.Shapes
 
 @Composable
 @Preview
@@ -53,7 +52,7 @@ fun BaseTextField(
         modifier = modifier
             .height(52.dp)
             .fillMaxWidth()
-            .clip(RoundedCornerShape(10.dp))
+            .clip(Shapes.cornerRadiusTen)
             .background(LightGray)
             .padding(start = 19.dp, end = 21.dp)
     ) {
@@ -77,8 +76,7 @@ fun BaseTextField(
                     if (textFieldValue.isEmpty()) {
                         Text(
                             text = placeholder,
-                            fontSize = 15.sp,
-                            style = getPoppinsTextStyleFor(FontWeights.FOUR_HUNDRED),
+                            style = MaterialTheme.typography.titleSmall,
                             modifier = Modifier
                                 .align(Alignment.CenterStart)
                         )
