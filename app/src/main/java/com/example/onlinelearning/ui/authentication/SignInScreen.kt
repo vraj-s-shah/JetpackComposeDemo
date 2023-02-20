@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -46,12 +47,11 @@ import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
 import com.example.onlinelearning.utils.CredentialsValidator
 import com.example.onlinelearning.utils.CustomSpannableString
 import com.example.onlinelearning.utils.SpannedString
-import com.example.onlinelearning.utils.extensions.getString
 import com.example.onlinelearning.utils.extensions.navigateWithNoBackStack
-import com.example.onlinelearning.utils.extensions.obtainViewModel
 import com.example.onlinelearning.utils.extensions.showShortToast
 import com.example.onlinelearning.utils.navigation.Authentication
 import com.example.onlinelearning.viewmodel.SignInViewModel
+import com.example.onlinelearning.viewmodel.obtainViewModel
 
 @Composable
 fun SignInScreen(
@@ -73,7 +73,7 @@ fun SignInScreen(
                 onBackButtonClicked = {
                     navHostController.navigateWithNoBackStack(Authentication.SignInSignUp.route)
                 },
-                centerText = getString(R.string.sign_in_title)
+                centerText = stringResource(R.string.sign_in_title)
             )
         }
     ) { padding ->
@@ -96,7 +96,7 @@ fun SignInScreen(
              * Welcome back title
              */
             Text(
-                text = getString(R.string.welcome_back_title),
+                text = stringResource(R.string.welcome_back_title),
                 style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
                 fontSize = 30.sp,
                 lineHeight = 39.sp,
@@ -110,7 +110,7 @@ fun SignInScreen(
                 BaseTextField(
                     textFieldValue = name,
                     onValueChanged = { viewModel.setName(it) },
-                    placeholder = getString(R.string.placeholder_name),
+                    placeholder = stringResource(R.string.placeholder_name),
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Words,
                         keyboardType = KeyboardType.Text,
@@ -127,7 +127,7 @@ fun SignInScreen(
                     textFieldValue = password,
                     onValueChanged = { viewModel.setPassword(it) },
                     hideText = isPasswordHidden,
-                    placeholder = getString(R.string.placeholder_password),
+                    placeholder = stringResource(R.string.placeholder_password),
                     rightButtonIcon = R.drawable.ic_password_eye,
                     onRightButtonClicked = { viewModel.setIsPasswordHidden(!isPasswordHidden) },
                     keyboardOptions = KeyboardOptions(
@@ -140,7 +140,7 @@ fun SignInScreen(
                 Spacer(modifier = Modifier.height(4.dp))
 
                 Text(
-                    text = getString(R.string.forgot_password),
+                    text = stringResource(R.string.forgot_password),
                     style = getPoppinsTextStyleFor(FontWeights.FIVE_HUNDRED),
                     fontSize = 13.sp,
                     lineHeight = 28.sp,
@@ -168,7 +168,7 @@ fun SignInScreen(
                     .padding(top = 25.dp, bottom = 40.dp)
             ) {
                 BaseButton(
-                    text = getString(id = R.string.sign_in)
+                    text = stringResource(id = R.string.sign_in)
                 ) {
                     viewModel.validateUserCredentials {
                         context.apply {
@@ -189,13 +189,13 @@ fun SignInScreen(
                 CustomSpannableString(
                     spannedStrings = arrayOf(
                         SpannedString(
-                            text = getString(R.string.dont_have_an_account),
+                            text = stringResource(R.string.dont_have_an_account),
                             fontWeight = FontWeights.FOUR_HUNDRED,
                             color = BlueText,
                             size = 13.sp
                         ),
                         SpannedString(
-                            text = getString(R.string.sign_up),
+                            text = stringResource(R.string.sign_up),
                             fontWeight = FontWeights.FIVE_HUNDRED,
                             color = BaseGreen,
                             size = 13.sp,
@@ -238,7 +238,7 @@ fun GoogleOrAppleLoginBlock() {
                     .weight(1f)
             )
             Text(
-                text = getString(R.string.or_continue_with),
+                text = stringResource(R.string.or_continue_with),
                 fontWeight = getFontWeightFor(FontWeights.FOUR_HUNDRED),
                 fontSize = 15.sp,
                 lineHeight = 15.sp
@@ -256,12 +256,12 @@ fun GoogleOrAppleLoginBlock() {
             modifier = Modifier.fillMaxWidth()
         ) {
             BaseLeftImageButton(
-                text = getString(R.string.google),
+                text = stringResource(R.string.google),
                 image = R.drawable.ic_google_logo,
                 modifier = Modifier.weight(1f)
             )
             BaseLeftImageButton(
-                text = getString(R.string.apple),
+                text = stringResource(R.string.apple),
                 image = R.drawable.ic_apple_logo,
                 modifier = Modifier.weight(1f)
             )

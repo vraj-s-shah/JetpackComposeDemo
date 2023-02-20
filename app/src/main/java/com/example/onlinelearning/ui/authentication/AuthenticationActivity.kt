@@ -10,10 +10,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.onlinelearning.ui.base.BaseComposeActivity
 import com.example.onlinelearning.ui.home.HomeActivity
 import com.example.onlinelearning.utils.Constants
-import com.example.onlinelearning.utils.extensions.obtainViewModel
 import com.example.onlinelearning.utils.extensions.startWithIntArgsAndFinish
 import com.example.onlinelearning.utils.navigation.Authentication
 import com.example.onlinelearning.viewmodel.ForgotAndResetPasswordViewModel
+import com.example.onlinelearning.viewmodel.obtainViewModel
 
 class AuthenticationActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

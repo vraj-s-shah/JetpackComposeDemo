@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -32,7 +33,6 @@ import com.example.onlinelearning.ui.theme.BlueText
 import com.example.onlinelearning.ui.theme.FontWeights
 import com.example.onlinelearning.ui.theme.getPoppinsTextStyleFor
 import com.example.onlinelearning.utils.CredentialsValidator
-import com.example.onlinelearning.utils.extensions.getString
 import com.example.onlinelearning.utils.extensions.showShortToast
 import com.example.onlinelearning.viewmodel.ForgotAndResetPasswordViewModel
 
@@ -54,7 +54,7 @@ fun ResetPasswordScreen(
         topBar = {
             TopBar(
                 onBackButtonClicked = { navHostController.navigateUp() },
-                centerText = getString(R.string.reset_password_title)
+                centerText = stringResource(R.string.reset_password_title)
             )
         }
     ) { padding ->
@@ -74,7 +74,7 @@ fun ResetPasswordScreen(
              * Enter a new password title
              */
             Text(
-                text = getString(R.string.enter_new_password),
+                text = stringResource(R.string.enter_new_password),
                 style = getPoppinsTextStyleFor(FontWeights.FOUR_HUNDRED),
                 fontSize = 16.sp,
                 lineHeight = 28.sp,
@@ -90,7 +90,7 @@ fun ResetPasswordScreen(
             BaseTextField(
                 textFieldValue = newPassword,
                 onValueChanged = { viewModel.setNewPassword(it) },
-                placeholder = getString(R.string.new_password_placeholder),
+                placeholder = stringResource(R.string.new_password_placeholder),
                 hideText = isNewPasswordHidden,
                 rightButtonIcon = R.drawable.ic_password_eye,
                 onRightButtonClicked = { viewModel.hideNewPassword(!isNewPasswordHidden) },
@@ -108,7 +108,7 @@ fun ResetPasswordScreen(
             BaseTextField(
                 textFieldValue = confirmPassword,
                 onValueChanged = { viewModel.setConfirmPassword(it) },
-                placeholder = getString(R.string.confirm_password_placeholder),
+                placeholder = stringResource(R.string.confirm_password_placeholder),
                 hideText = isConfirmPasswordHidden,
                 rightButtonIcon = R.drawable.ic_password_eye,
                 onRightButtonClicked = { viewModel.hideConfirmPassword(!isConfirmPasswordHidden) },
@@ -123,7 +123,7 @@ fun ResetPasswordScreen(
             
             Spacer(modifier = Modifier.height(55.dp))
             
-            BaseButton(text = getString(R.string.confirm)) {
+            BaseButton(text = stringResource(R.string.confirm)) {
                 viewModel.updatePassword {
                     with(context) {
                         when (it) {

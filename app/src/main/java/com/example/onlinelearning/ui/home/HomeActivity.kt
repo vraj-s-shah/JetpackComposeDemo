@@ -16,11 +16,11 @@ import com.example.onlinelearning.ui.base.BaseComposeActivity
 import com.example.onlinelearning.ui.base.BottomNavigationBar
 import com.example.onlinelearning.ui.theme.BottomNavigationBarShadowColor
 import com.example.onlinelearning.utils.Constants.LOGGED_IN_USER_KEY
-import com.example.onlinelearning.utils.extensions.obtainViewModel
 import com.example.onlinelearning.utils.extensions.shadow
 import com.example.onlinelearning.utils.navigation.BottomNavigationItem
 import com.example.onlinelearning.utils.prefs.SharedPrefs.Companion.UNKNOWN_USER_ID
 import com.example.onlinelearning.viewmodel.HomeViewModel
+import com.example.onlinelearning.viewmodel.obtainViewModel
 
 class HomeActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -2,6 +2,7 @@ package com.example.onlinelearning.utils.extensions
 
 import android.content.Context
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import com.example.onlinelearning.utils.Text
 
 /**
@@ -18,5 +19,5 @@ fun Text.getText(context: Context): String = when (this) {
 @Composable
 fun Text.getText(): String = when (this) {
     is Text.String -> text
-    is Text.StringResource -> withAppContext { getString(id) }
+    is Text.StringResource -> LocalContext.current.getString(id)
 }

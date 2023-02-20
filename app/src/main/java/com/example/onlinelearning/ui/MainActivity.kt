@@ -7,10 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.onlinelearning.ui.base.BaseComposeActivity
-import com.example.onlinelearning.utils.extensions.obtainViewModel
 import com.example.onlinelearning.utils.extensions.startAndFinish
 import com.example.onlinelearning.viewmodel.SplashScreenViewModel
-
+import com.example.onlinelearning.viewmodel.obtainViewModel
 
 class MainActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
