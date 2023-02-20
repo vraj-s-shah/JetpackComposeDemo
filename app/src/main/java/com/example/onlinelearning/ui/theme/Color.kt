@@ -2,13 +2,15 @@ package com.example.onlinelearning.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
 val BlueText = Color(0xFF202244)
 val LightGrayText = Color(0xFF979797)
 val BaseGreen = Color(0xFF30C084)
 val LightGray = Color(0xFFF6F6F6)
 val ProgressCircleBackground = Color(0xFFF5F5F5)
 val BottomNavigationBarShadowColor = Color(0x12000000)
+val SliderProgressGradientStart = Color(0xFFFDC573)
+val SliderProgressGradientEnd = Color(0xFFFAB44C)
+val WhiteO20 = Color(0x33FFFFFF)
+val WhiteO70 = Color(0xB3FFFFFF)
+val BlackO10 = Color(0x1A000000)
+val CourseCardGradientEnd = Color(0xCC30C084)

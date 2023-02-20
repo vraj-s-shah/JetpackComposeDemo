@@ -48,4 +48,20 @@
     <string name="new_password_placeholder">New Password</string>
     <string name="confirm_password_placeholder">Confirm Password</string>
     <string name="password_not_matching">Passwords are not matching</string>
+    <string name="greeting_title">Hey, %1$s</string>
+    <string name="lets_start_learning">Let’s Start Learning!</string>
+    <string name="search_view_placeholder">Search anything</string>
+    <string name="ui_ux_design">UI UX Design</string>
+    <string name="ux_recharse">UX Recharse</string>
+    <string name="graphic_design">Graphic Design</string>
+    <string name="digital_marketing">Digital Marketing</string>
+    <string name="programming">Programming</string>
+    <string name="ongoing_course">Ongoing Course</string>
+    <string name="view_all">View All</string>
+    <string name="number_of_lessons">%1$d Lesson</string>
+    <string name="number_of_videos">%1$d Videos</string>
+    <string name="number_of_sheets">%1$d Sheet</string>
+    <string name="number_of_quiz">%1$d Quiz</string>
+    <string name="choice_your_courses">Choice your courses</string>
+    <string name="number_of_enrolls">%1$d+ Enrolled</string>
 </resources>

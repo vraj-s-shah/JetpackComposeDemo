@@ -44,6 +44,13 @@ class ViewModelFactory private constructor(
                     mSharedPrefs
                 )
             }
+            isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(
+                    mApplication,
+                    mSharedPrefs,
+                    mAppDatabase.usersDao()
+                )
+            }
             else -> {
                 throw IllegalArgumentException(
                     "Unknown ViewModel class: ${modelClass.name}"

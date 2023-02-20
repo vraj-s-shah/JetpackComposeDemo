@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class SignUpViewModel(
-    private val usersDao: UsersDao,
+    usersDao: UsersDao,
     private val mSharedPrefs: SharedPrefs
 ) : ViewModel() {
 
@@ -66,6 +66,7 @@ class SignUpViewModel(
                     !mUserRepository.addUser(mUserEntity) -> null
                     else -> {
                         mUserRepository.getUserId(name.value)?.let {
+                            setUserLoggedIn(it)
                             CredentialsValidator.Success(it)
                         }
                     }
@@ -74,8 +75,9 @@ class SignUpViewModel(
         }
     }
 
-    fun setUserLoggedIn() {
+    private fun setUserLoggedIn(id: Int) {
         mSharedPrefs.isUserLoggedIn = true
+        mSharedPrefs.loggedInUserId = id
     }
 
     private fun isAnyCredentialEmpty(): Boolean =
